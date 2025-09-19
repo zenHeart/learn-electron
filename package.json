@@ -1,0 +1,34 @@
+{
+  "name": "learn-electron",
+  "version": "1.0.0",
+  "description": "Comprehensive Electron.js learning documentation",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "init": "lerna clean;lerna bootstrap",
+    "demo:start": "lerna run start --scope electron-quick-start",
+    "demo:screenshot": "lerna run start --scope screenshot",
+    "demo:shortcut": "lerna run start --scope shortcut",
+    "demo:memory": "lerna run start --scope memory",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "electron",
+    "documentation",
+    "tutorial"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^8.2.1"
+  },
+  "devDependencies": {
+    "lerna": "^3.20.2",
+    "vitepress": "2.0.0-alpha.12"
+  }
+}

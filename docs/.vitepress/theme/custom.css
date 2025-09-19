@@ -1,0 +1,35 @@
+:root {
+  --vp-c-brand: #47cacc;
+  --vp-c-brand-light: #5dd7d9;
+  --vp-c-brand-lighter: #73e3e6;
+  --vp-c-brand-dark: #3bb4b6;
+  --vp-c-brand-darker: #2f9ea0;
+}
+
+.dark {
+  --vp-c-brand: #5dd7d9;
+  --vp-c-brand-light: #73e3e6;
+  --vp-c-brand-lighter: #8aebee;
+  --vp-c-brand-dark: #47cacc;
+  --vp-c-brand-darker: #3bb4b6;
+}
+
+/* Custom styles for better readability */
+.vp-doc h1,
+.vp-doc h2,
+.vp-doc h3,
+.vp-doc h4,
+.vp-doc h5,
+.vp-doc h6 {
+  color: var(--vp-c-brand-dark);
+}
+
+/* Improve code block styling */
+.vp-doc [class*='language-'] {
+  background: var(--vp-code-block-bg);
+}
+
+/* Custom footer styling */
+.VPFooter {
+  background-color: var(--vp-c-bg-alt);
+}

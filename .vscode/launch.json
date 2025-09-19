@@ -1,0 +1,28 @@
+{
+
+  "version": "0.2.0",
+  "configurations": [
+      {
+          "name": "调试内存收集",
+          "type": "node-terminal",
+          "request": "launch",
+          "cwd": "${workspaceRoot}/demos/memory",
+          "command": "npm start",
+          "windows": {
+            "command": "npm start",
+          },
+          "outputCapture": "std"
+      },
+      {
+        "name": "setbounds",
+        "type": "node-terminal",
+        "request": "launch",
+        "cwd": "${workspaceRoot}/demos/setBounds",
+        "command": "npm start",
+        "windows": {
+          "command": "npm start",
+        },
+        "outputCapture": "std"
+    }
+  ]
+}
