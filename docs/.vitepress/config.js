@@ -20,7 +20,8 @@ function generateSidebar() {
           { text: 'Debug', link: '/03.engineering/debug' },
           { text: 'Extensions', link: '/03.engineering/extension' },
           { text: 'Common Issues', link: '/03.engineering/hole' },
-          { text: 'Tools', link: '/03.engineering/tools' }
+          { text: 'Tools', link: '/03.engineering/tools' },
+          { text: "metrics", link: "/03.engineering/metrics" }
         ]
       },
       {
@@ -29,6 +30,12 @@ function generateSidebar() {
         items: [
           { text: 'Memory Management', link: '/04.performance/memory' },
           { text: 'Tracing', link: '/04.performance/trace' }
+        ]
+      },
+      {
+        text: "drafts",
+        items: [
+          { text: "infrastructure", link: "/drafts/infrastructure" },
         ]
       }
     ]
