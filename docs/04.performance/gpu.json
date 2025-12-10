@@ -1,0 +1,58 @@
+{
+  "startup_duration": 0,
+  "result_file": "./gpu-crash-trace.json",
+  "trace_config": {
+    "record_mode": "record-continuously",
+    "trace_buffer_size_in_kb": 300000,
+    "enable_systrace": false,
+    "included_categories": ["*"],
+    "excluded_categories": [
+      "loading",
+      "net",
+      "netlog",
+      "disk_cache",
+      "browser.navigation",
+      "navigation",
+      "service_worker",
+      "passwords",
+      "blob",
+      "indexeddb",
+      "leveldb",
+      "audio"
+    ],
+    "included_categories_explicitly": [
+      "gpu",
+      "viz",
+      "cc",
+      "media",
+      "webrtc",
+      "toplevel",
+      "latency",
+      "latencyInfo",
+      "benchmark",
+      "input",
+      "mojom",
+      "ipc",
+      "browser",
+      "blink",
+      "blink.user_timing",
+      "scheduler",
+      "sequence_manager",
+      "v8",
+      "disabled-by-default-gpu.service",
+      "disabled-by-default-gpu.device",
+      "disabled-by-default-gpu.decoder",
+      "disabled-by-default-viz.quads",
+      "disabled-by-default-viz.surface_id_flow",
+      "disabled-by-default-viz.gpu_composite_time",
+      "disabled-by-default-devtools.timeline",
+      "disabled-by-default-devtools.timeline.frame"
+    ],
+    "memory_dump_config": {
+      "triggers": [
+        { "mode": "light", "periodic_interval_ms": 1000 },
+        { "mode": "detailed", "periodic_interval_ms": 10000 }
+      ]
+    }
+  }
+}

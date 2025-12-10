@@ -1,0 +1,21 @@
+{
+  "name": "electron-22-demo",
+  "version": "1.0.0",
+  "description": "A minimal Electron 22.3.27 application",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [
+    "Electron",
+    "22.3.27",
+    "demo"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "22.3.27"
+  }
+}
+
+

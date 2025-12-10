@@ -47,3 +47,8 @@ asar e app.asar ~/Desktop/app
 ## useful options
 
 - `--show-fps-counter` 可以在 electron 上显示 fps 帧率和 gpu 内存使用情况
+
+
+## log debug
+
+1. run application use with `--enable-logging --log-file=electron.txt` ，will output log in current directory,
