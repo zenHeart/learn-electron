@@ -52,3 +52,8 @@ asar e app.asar ~/Desktop/app
 ## log debug
 
 1. run application use with `--enable-logging --log-file=electron.txt` ，will output log in current directory,
+
+
+## reference
+
+* [main process capture](https://learn.microsoft.com/en-us/microsoft-cloud/dev/dev-proxy/how-to/use-dev-proxy-with-nodejs)
