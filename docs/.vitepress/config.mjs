@@ -215,6 +215,25 @@ export default defineConfig({
 
   markdown: {
     lineNumbers: true,
+    mermaid: {
+      // 主题对齐站点 token：电弧青主色 / 墨青文字 / 轻纸底
+      theme: 'base',
+      themeVariables: {
+        primaryColor: '#e3f4f9',
+        primaryBorderColor: '#0092b8',
+        primaryTextColor: '#1a2e35',
+        lineColor: '#5e7a85',
+        secondaryColor: '#f3ece4',
+        secondaryBorderColor: '#b26a2c',
+        tertiaryColor: '#f0f3f4',
+        fontSize: '14px',
+        fontFamily: '-apple-system, PingFang SC, Microsoft YaHei, sans-serif',
+        clusterBkg: '#f7f9fa',
+        clusterBorder: '#c8d4d9'
+      },
+      flowchart: { curve: 'basis', padding: 12 },
+      sequence: { actorFontWeight: 600, boxMargin: 10 }
+    },
     config(md) {
       // ::: exp 实战经验容器
       md.use(container, 'exp', {

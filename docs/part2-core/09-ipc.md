@@ -8,19 +8,22 @@
 
 ```mermaid
 flowchart LR
-    subgraph R[渲染进程]
-        rcode[业务代码]
-        bridge[contextBridge 白名单]
+    subgraph R["渲染进程 · 不可信侧"]
+        rcode["业务代码"]
+        bridge["contextBridge 白名单<br/>（通往外界的唯一窗口）"]
     end
-    subgraph M[主进程]
-        h[ipcMain.handle]
-        on[ipcMain.on]
-        wc[webContents.send]
+    subgraph M["主进程 · 可信侧"]
+        h["ipcMain.handle"]
+        on["ipcMain.on"]
+        wc["webContents.send"]
     end
-    rcode -- "invoke（请求-响应）" --> bridge --> h
-    rcode -- "send（单向事件）" --> bridge --> on
-    wc -- "push（主动推送）" --> bridge --> rcode
+    rcode -- "① invoke（请求-响应，返回 Promise）" --> bridge --> h
+    rcode -- "② send（单向事件，触发即忘）" --> bridge --> on
+    wc -- "③ push（主进程主动推送）" --> rcode
+    bridge -. "④ MessagePort（端口直连，绕开主进程）" .-> h
 ```
+
+> 两幅图之间有一堵看不见的墙：**结构化克隆序列化**——函数、DOM、`Proxy` 都止步于边界线上。这堵墙既是限制（见后文「为什么只有这几种」），也是安全边界本身。
 
 | 模式 | API 组合 | 语义 | 适用 |
 |---|---|---|---|

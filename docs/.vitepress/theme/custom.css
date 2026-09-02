@@ -179,3 +179,34 @@ h1, h2, h3 {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ============ mermaid 图：实验卡片气质 ============ */
+.vp-doc .mermaid {
+  margin: 20px auto;
+  padding: 18px 12px;
+  background: color-mix(in srgb, var(--vp-c-bg) 60%, #ffffff 40%);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 10px;
+  overflow-x: auto;           /* 宽图横向滚动，不挤压布局 */
+  display: flex;
+  justify-content: center;    /* 居中 */
+  transition: border-color 0.2s;
+}
+
+.vp-doc .mermaid:hover {
+  border-color: var(--vp-c-brand-2);
+}
+
+.vp-doc .mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+
+.dark .vp-doc .mermaid {
+  background: color-mix(in srgb, var(--vp-c-bg) 82%, #000000 18%);
+}
+
+.dark .vp-doc .mermaid .cluster rect {
+  fill: rgba(255, 255, 255, 0.03);
+  stroke: rgba(255, 255, 255, 0.12);
+}

@@ -8,28 +8,31 @@
 
 ```mermaid
 graph TB
-    subgraph MAIN["主进程（全应用唯一）· Node.js 完整环境"]
-        M["窗口创建与销毁 · 应用生命周期<br/>菜单 / 托盘 / 对话框 · 系统集成<br/>加载原生模块（N-API）"]
+    subgraph MAIN["主进程（全应用唯一）——你的 main.js"]
+        direction TB
+        M["✅ 完整 Node.js：fs / net / child_process<br/>✅ Electron 主 API：BrowserWindow / app / 菜单 / 托盘<br/>✅ 原生模块（N-API）<br/>❌ DOM / 页面上下文"]
+        MCRASH["💥 崩溃域：整个应用消失"]
     end
 
-    subgraph RENDERERS["渲染进程 · 每个窗口一个 · Chromium 沙箱"]
-        R1["窗口 A：页面 DOM + 页面 JS"]
-        R2["窗口 B：页面 DOM + 页面 JS"]
-        R3["窗口 C：页面 DOM + 页面 JS"]
+    subgraph RENDERERS["渲染进程 · 每窗口一个 · Chromium 沙箱——你的 preload.js + 页面代码"]
+        direction LR
+        R1["窗口 A<br/>✅ DOM / fetch / Web API<br/>❌ require / fs"]
+        R2["窗口 B<br/>（同一份约束）"]
     end
 
-    subgraph HELPERS["辅助进程（Chromium 自动管理 + 你主动创建）"]
-        GPU["GPU 进程<br/>绘制合成"]
+    subgraph HELPERS["辅助进程（系统自动管理 + 你主动创建）"]
+        direction LR
+        GPU["GPU 进程<br/>绘制合成<br/>崩溃可自动恢复"]
         NET["网络服务进程<br/>所有请求收发"]
-        UTIL["UtilityProcess<br/>你的 CPU 密集任务"]
+        UTIL["UtilityProcess<br/>你的 heavy-task.js<br/>💥 只挂自己"]
     end
 
-    R1 <-. "IPC" .-> M
+    R1 <-. "IPC（结构化克隆）" .-> M
     R2 <-. "IPC" .-> M
-    R3 <-. "IPC" .-> M
     M --> GPU
     M --> NET
     M --> UTIL
+    M -.->|崩溃域| MCRASH
 ```
 
 三个角色，记住各自的「能力面」：
