@@ -17,3 +17,5 @@ lerna-debug.log*
 .pnp.data.json
 .pnp.js
 dist
+test-results
+playwright-report

@@ -4,7 +4,9 @@
   "description": "A minimal Electron 22.3.27 application",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "test": "playwright test",
+    "test:debug": "playwright test --debug"
   },
   "keywords": [
     "Electron",
@@ -15,7 +17,9 @@
   "license": "MIT",
   "devDependencies": {
     "electron": "22.3.27"
+  },
+  "dependencies": {
+    "@playwright/test": "^1.57.0",
+    "playwright": "^1.57.0"
   }
 }
-
-

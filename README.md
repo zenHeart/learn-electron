@@ -1,70 +1,40 @@
-# Learn Electron Documentation
+# Learn Electron
 
-This directory contains the VitePress documentation site for the Learn Electron project.
+Electron 实战学习站：理解核心逻辑、掌握实战经验、完成工程交付。
 
-## Quick Start
+线上地址：[electron.zenheart.site](https://electron.zenheart.site)（部署中）
 
-1. Install dependencies:
-   ```bash
-   npm install
-   ```
+## 站点结构
 
-2. Start the development server:
-   ```bash
-   npm run docs:dev
-   ```
-
-3. Build for production:
-   ```bash
-   npm run docs:build
-   ```
-
-4. Preview the built site:
-   ```bash
-   npm run docs:preview
-   ```
-
-## Project Structure
-
-```
+```text
 docs/
-├── .vitepress/          # VitePress configuration
-│   ├── config.js        # Main configuration file
-│   └── theme/           # Custom theme
-├── public/              # Static assets
-│   ├── logo.svg
-│   ├── favicon.svg
-│   └── CNAME           # Custom domain configuration
-├── _draft/             # Development guides
-│   ├── architecture/
-│   ├── memory/
-│   └── trace/
-├── index.md            # Homepage
-├── begin.md            # Getting started guide
-├── projects.md         # Project examples
-└── rosetta.md          # Rosetta compatibility
+├── guide/                    # 五篇式知识地图（金字塔结构）
+│   ├── 01~05 认知篇          # 是什么/进程模型/生命周期/安全/IPC
+│   ├── 06~10 实战篇          # 窗口/系统能力/存储/Web嵌入/原生扩展
+│   ├── 11~14 交付篇          # 打包/签名/更新/CI
+│   ├── 15~18 保障篇          # 调试/性能/测试/监控
+│   └── cases/                # 七个真实踩坑案例（现象→诊断→根因→修复→预防）
+└── appendix/                 # 路线图/命令行速查/版本策略/术语表/资源索引
 ```
 
-## Deployment
+## 本地开发
 
-The site is automatically deployed to GitHub Pages at [blog.zenheart.site/electron](https://blog.zenheart.site/electron) when changes are pushed to the main branch.
+```bash
+pnpm install
+pnpm docs:dev        # http://localhost:5173
+pnpm docs:build      # 产物在 docs/.vitepress/dist
+```
 
-### GitHub Actions Workflow
+## 内容来源与原则
 
-The deployment is handled by `.github/workflows/deploy.yml` which:
+- **不拷贝官方文档**：官方讲"是什么"，本站讲"为什么"与"生产上踩过什么坑"；每篇附官方 canonical 链接。
+- **实战经验**：全部来自真实桌面客户端（Windows/macOS 多窗口、原生 SDK、百万级用户量）的生产实践，已做通用化改写，不含任何公司/产品内部信息。
+- **金字塔写作**：每篇 = 一句话本质 → 心智模型 → 机理与最小示例 → 实战要点（铜色块）→ 坑位警报（橙色块）→ 延伸阅读。
 
-1. Builds the VitePress site
-2. Deploys to GitHub Pages
-3. Configures custom domain
+## demos/
 
-### Custom Domain Setup
+早期学习时的最小示例（quick-start、screenshot、shortcut、memory、setBounds、electron-22 测试骨架），与文档站相互独立。
 
-1. Add your domain to the CNAME file in `docs/public/CNAME`
-2. Configure your DNS to point to GitHub Pages
-3. Enable custom domain in GitHub Pages settings
+## License
 
-## Contributing
-
-1. Add new documentation files as Markdown (`.md`)
-2. The navigation will be automatically generated based on the file structure
-3. Update the sidebar configuration in `.vitepress/config.js` if needed
+MIT

@@ -1,7 +1,16 @@
-<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="32" cy="32" r="30" fill="#47cacc" stroke="#2f9ea0" stroke-width="4"/>
-  <path d="M20 28h24v8H20z" fill="white"/>
-  <circle cx="26" cy="32" r="2" fill="#47cacc"/>
-  <circle cx="38" cy="32" r="2" fill="#47cacc"/>
-  <path d="M18 38c0-8 6-14 14-14s14 6 14 14" stroke="white" stroke-width="2" fill="none"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
+  <!-- 原子轨道 logo：电子绕核运动 -->
+  <g transform="translate(64 64)">
+    <!-- 三条交叉轨道 -->
+    <ellipse rx="52" ry="22" stroke="#00B8D9" stroke-width="3.5"/>
+    <ellipse rx="52" ry="22" stroke="#00B8D9" stroke-width="3.5" transform="rotate(60)"/>
+    <ellipse rx="52" ry="22" stroke="#00B8D9" stroke-width="3.5" transform="rotate(120)"/>
+    <!-- 原子核 -->
+    <circle r="9" fill="#1A2E35"/>
+    <circle r="4" fill="#C47F3D"/>
+    <!-- 电子 -->
+    <circle cx="52" cy="0" r="5" fill="#1A2E35"/>
+    <circle cx="-26" cy="45" r="5" fill="#1A2E35"/>
+    <circle cx="-26" cy="-45" r="5" fill="#1A2E35"/>
+  </g>
 </svg>

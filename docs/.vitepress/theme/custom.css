@@ -1,35 +1,181 @@
+/**
+ * Learn Electron 主题 · 「实验记录本 + 原子轨道」
+ *
+ * 设计 token：
+ *   paper 冷调纸白 / ink 墨青 / arc 电弧青（主强调）/ copper 铜（实战经验专用）/ dim 雾青灰
+ * 字体：中文大标题衬线（辨识度），正文系统黑体，代码等宽
+ */
+
 :root {
-  --vp-c-brand: #47cacc;
-  --vp-c-brand-light: #5dd7d9;
-  --vp-c-brand-lighter: #73e3e6;
-  --vp-c-brand-dark: #3bb4b6;
-  --vp-c-brand-darker: #2f9ea0;
+  /* 品牌色系 */
+  --paper: #f7f9fa;
+  --ink: #1a2e35;
+  --arc: #0092b8;
+  --arc-strong: #00b8d9;
+  --copper: #b26a2c;
+  --dim: #5e7a85;
+
+  /* VitePress 品牌变量映射 */
+  --vp-c-brand-1: #0083a3;
+  --vp-c-brand-2: #0092b8;
+  --vp-c-brand-3: #00b8d9;
+  --vp-c-brand-soft: rgba(0, 146, 184, 0.14);
+  --vp-c-bg: var(--paper);
+  --vp-c-text-1: var(--ink);
+  --vp-c-text-2: #3d5560;
+  --vp-c-text-3: var(--dim);
+
+  --vp-font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --vp-font-family-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, SFMono-Regular,
+    Menlo, Consolas, monospace;
+
+  /* 「元素周期表格子」章节眉标 */
+  --elem-cell-bg: var(--ink);
+  --elem-cell-fg: var(--arc-strong);
 }
 
 .dark {
-  --vp-c-brand: #5dd7d9;
-  --vp-c-brand-light: #73e3e6;
-  --vp-c-brand-lighter: #8aebee;
-  --vp-c-brand-dark: #47cacc;
-  --vp-c-brand-darker: #3bb4b6;
+  --paper: #10181c;
+  --ink: #dce7eb;
+  --arc: #4dd8f2;
+  --arc-strong: #4dd8f2;
+  --copper: #d9995c;
+  --dim: #7d99a3;
+
+  --vp-c-brand-1: #4dd8f2;
+  --vp-c-brand-2: #35c6e2;
+  --vp-c-brand-3: #1fb3d2;
+  --vp-c-brand-soft: rgba(77, 216, 242, 0.14);
+  --vp-c-bg: #10181c;
+  --vp-c-text-1: #dce7eb;
+  --vp-c-text-2: #a7bcc4;
+  --vp-c-text-3: #7d99a3;
+
+  --elem-cell-bg: #1e2f37;
 }
 
-/* Custom styles for better readability */
-.vp-doc h1,
-.vp-doc h2,
-.vp-doc h3,
-.vp-doc h4,
-.vp-doc h5,
-.vp-doc h6 {
-  color: var(--vp-c-brand-dark);
+/* ============ 标题：衬线中文，技术站里罕见的辨识度 ============ */
+h1, h2, h3 {
+  font-family: 'Noto Serif SC', 'Songti SC', 'SimSun', serif;
+  letter-spacing: 0.01em;
 }
 
-/* Improve code block styling */
-.vp-doc [class*='language-'] {
-  background: var(--vp-code-block-bg);
+.vp-doc h1 {
+  font-weight: 700;
 }
 
-/* Custom footer styling */
-.VPFooter {
-  background-color: var(--vp-c-bg-alt);
+/* 首页 hero 大标题 */
+.home-hero-name {
+  font-family: 'Noto Serif SC', 'Songti SC', serif;
+}
+
+/* ============ 章节眉标：元素周期表格子 ============ */
+.elem-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-family: var(--vp-font-family-mono);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: var(--dim);
+}
+
+.elem-badge::before {
+  content: attr(data-num);
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.9em;
+  height: 1.9em;
+  padding: 0 0.25em;
+  background: var(--elem-cell-bg);
+  color: var(--elem-cell-fg);
+  border-radius: 3px;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+/* ============ 「实战经验」容器（copper 铜色，导线材料） ============ */
+.custom-block.exp {
+  border: 1px solid color-mix(in srgb, var(--copper) 38%, transparent);
+  background: color-mix(in srgb, var(--copper) 7%, var(--vp-c-bg));
+  border-radius: 8px;
+  padding: 16px 16px 8px;
+}
+
+.custom-block.exp .custom-block-title {
+  color: var(--copper);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+}
+
+.custom-block.exp .custom-block-title::before {
+  content: '⚡ ';
+}
+
+.custom-block.exp code {
+  background: color-mix(in srgb, var(--copper) 12%, transparent);
+}
+
+/* ============ 「坑位警报」容器 ============ */
+.custom-block.pitfall {
+  border-color: color-mix(in srgb, #c05621 45%, transparent);
+  background: color-mix(in srgb, #c05621 6%, var(--vp-c-bg));
+}
+
+.custom-block.pitfall .custom-block-title {
+  color: #c05621;
+}
+
+.dark .custom-block.pitfall {
+  border-color: color-mix(in srgb, #e8863c 45%, transparent);
+  background: color-mix(in srgb, #e8863c 8%, var(--vp-c-bg));
+}
+
+.dark .custom-block.pitfall .custom-block-title {
+  color: #e8863c;
+}
+
+/* ============ 代码块：实验记录气质 ============ */
+.vp-doc div[class*='language-'] {
+  border-radius: 8px;
+}
+
+.vp-doc div[class*='language-'] code {
+  font-size: 13.5px;
+  line-height: 1.7;
+}
+
+/* 行内代码 */
+.vp-doc :not(pre) > code {
+  font-size: 0.9em;
+  color: var(--vp-c-brand-2);
+}
+
+/* ============ 首页 ============ */
+.home-hero-name .clip {
+  -webkit-background-clip: unset;
+  background-clip: unset;
+  color: var(--vp-c-text-1);
+  -webkit-text-fill-color: unset;
+}
+
+/* feature 卡片 hover 微交互 */
+.VPFeatures .VPFeature {
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.VPFeatures .VPFeature:hover {
+  transform: translateY(-3px);
+  border-color: var(--vp-c-brand-2);
+}
+
+/* 动画克制：尊重 reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
