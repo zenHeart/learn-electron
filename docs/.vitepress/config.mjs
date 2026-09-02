@@ -6,7 +6,7 @@ export default defineConfig({
   title: 'Learn Electron',
   description: 'Electron 实战学习站：理解核心逻辑、掌握实战经验、完成工程交付',
   lang: 'zh-CN',
-  base: '/',
+  base: '/learn-electron/',
 
   head: [
     ['link', { rel: 'icon', href: '/favicon.svg' }],
