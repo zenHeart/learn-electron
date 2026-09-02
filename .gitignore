@@ -19,3 +19,4 @@ lerna-debug.log*
 dist
 test-results
 playwright-report.playwright-mcp/
+.playwright-mcp/
