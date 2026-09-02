@@ -67,7 +67,7 @@ Electron 从 2.0 起遵循 [SemVer](https://semver.org/)，但每一档的含义
 - [ ] 原生模块全量重编（major 升级必然伴随 Node ABI 变化）：`npx @electron/rebuild -f`
 - [ ] 配套工具链同步：Forge / electron-builder / 各 `@electron/*` 包升到声明支持目标版本的档位
 - [ ] grep 扫描安全相关配置的历史遗留：`nodeIntegration`、`contextIsolation`、`webSecurity`——新版本的默认值可能反转
-- [ ] 多窗口与长时运行回归：反复开关窗口、挂机 24 小时看内存曲线（参考[多窗口关闭崩溃案例](/guide/cases/04-multi-window-crash)）
+- [ ] 多窗口与长时运行回归：反复开关窗口、挂机 24 小时看内存曲线（参考[多窗口关闭崩溃案例](/cases/04-multi-window-crash)）
 - [ ] 崩溃率基线：升级前先记录当前崩溃率，否则升级后没法对比
 - [ ] 灰度路径：1% → 10% → 50% → 全量，每档至少观察一个完整使用周期
 - [ ] 回滚预案：旧版安装包可下发，更新通道可回切
@@ -90,7 +90,7 @@ Electron 从 2.0 起遵循 [SemVer](https://semver.org/)，但每一档的含义
 - **崩溃率**（特定版本已知 bug）：先去 [GitHub issues](https://github.com/electron/electron/issues) 确认是不是已知问题——很多时候一个 patch 版本就修了，不必跳 major。
 - **功能**（需要新 API）：最低紧迫度，搭版本窗口车即可。
 
-真的「升不动」时（原生 SDK 停更、认证周期没到），活路是**锁旧版本 + 自建规则兜底**：把旧版本的风险面收敛成可控规则——例如按机型差异下发命令行开关（GPU 异常机器禁用硬件加速），用崩溃监控盯住规则命中量，给自己争取到下一个升级窗口。规则引擎的思路见[性能优化](/guide/16-performance)的 GPU 适配部分。
+真的「升不动」时（原生 SDK 停更、认证周期没到），活路是**锁旧版本 + 自建规则兜底**：把旧版本的风险面收敛成可控规则——例如按机型差异下发命令行开关（GPU 异常机器禁用硬件加速），用崩溃监控盯住规则命中量，给自己争取到下一个升级窗口。规则引擎的思路见[性能优化](/part3-engineering/18-performance)的 GPU 适配部分。
 :::
 
 ## 官方参考

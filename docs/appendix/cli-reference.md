@@ -11,14 +11,14 @@
 | `--remote-debugging-port=port` | 开 CDP 远程调试（渲染进程 DevTools / 自动化注入） | `electron --remote-debugging-port=9222 .`，浏览器打开 `chrome://inspect` |
 | `--enable-logging[=file]` | Chromium 内部日志打到 stderr 或文件 | Windows 子进程日志只能落文件：`--enable-logging=file --log-file=C:\logs\app.log` |
 | `--log-net-log=path` | 记录全部网络事件为 NetLog 文件 | `electron --log-net-log=net.json .`，拖入 [NetLog Viewer](https://netlog-viewer.appspot.com/) 分析 |
-| `--trace-config-file=path` | 按 JSON 配置文件采集系统 trace | 性能与启动分析用，产物导入 [Perfetto](https://ui.perfetto.dev/) 看（见[调试体系](/guide/15-debugging)） |
+| `--trace-config-file=path` | 按 JSON 配置文件采集系统 trace | 性能与启动分析用，产物导入 [Perfetto](https://ui.perfetto.dev/) 看（见[调试体系](/part3-engineering/16-debugging)） |
 | `--show-fps-counter` | 页面角落显示合成器帧率计数 | 肉眼快速确认掉帧是否存在 |
 
 ## GPU / 渲染类
 
 | 开关 | 作用 | 典型用法 |
 | --- | --- | --- |
-| `--disable-gpu` | 完全禁用 GPU 加速 | GPU 崩溃排查的第一步对照实验（[GPU 崩溃五步分析法](/guide/cases/02-gpu-crash)） |
+| `--disable-gpu` | 完全禁用 GPU 加速 | GPU 崩溃排查的第一步对照实验（[GPU 崩溃五步分析法](/cases/02-gpu-crash)） |
 | `--disable-gpu-compositing` | 保留 GPU 光栅化，仅合成走软件 | 区分「绘制崩」还是「合成崩」 |
 | `--use-angle=<backend>` | 指定 ANGLE 图形后端 | `--use-angle=swiftshader` 强制软件渲染；`--use-angle=d3d11` 锁 Windows 后端 |
 | `--disable-features=A,B` | 按名禁用 Chromium 特性 | `--disable-features=SpareRendererForSitePerProcess` |
@@ -114,7 +114,7 @@ const env = process.argv
 2. **对源码**：到 Chromium 源码确认开关真实存在——通用开关看 [`base/base_switches.cc`](https://source.chromium.org/chromium/chromium/src/+/main:base/base_switches.cc)，特性开关（`--enable-features` 系列）的定义分散在各模块的 `*_features.cc`，全量清单参考 [`chrome/browser/flag-metadata.json`](https://source.chromium.org/chromium/chromium/src/+/main:chrome/browser/flag-metadata.json)。Electron 侧的用法可以搜 [electron 仓库 spec/ 测试目录](https://github.com/electron/electron/tree/main/spec)里同一开关怎么传参。
 3. **对时机**：确认调用发生在 Chromium 消费该开关之前——`appendSwitch` 必须早于 `ready`；GPU 类开关必须早于第一个窗口创建。
 
-三步走完，剩下的就是要么换版本、要么改写法、要么挪时机。完整案例见[命令行开关不生效](/guide/cases/07-flag-not-working)。
+三步走完，剩下的就是要么换版本、要么改写法、要么挪时机。完整案例见[命令行开关不生效](/cases/07-flag-not-working)。
 :::
 
 ## 官方参考

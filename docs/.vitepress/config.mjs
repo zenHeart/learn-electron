@@ -31,70 +31,135 @@ export default defineConfig({
     logo: '/logo.svg',
 
     nav: [
-      { text: '认知', link: '/guide/01-what-is-electron', activeMatch: '/guide/0[1-5]' },
-      { text: '实战', link: '/guide/06-windows', activeMatch: '/guide/(0[6-9]|10)' },
-      { text: '交付', link: '/guide/11-packaging', activeMatch: '/guide/1[1-4]' },
-      { text: '保障', link: '/guide/15-debugging', activeMatch: '/guide/1[5-8]' },
-      { text: '案例库', link: '/guide/cases/01-zoom-white-screen', activeMatch: '/guide/cases/' },
-      { text: '附录', link: '/appendix/roadmap', activeMatch: '/appendix/' },
+      { text: '第一部分 · 背景', link: '/part1-background/01-what-is-electron', activeMatch: '/part1-background/' },
+      { text: '第二部分 · 核心', link: '/part2-core/06-first-app', activeMatch: '/part2-core/' },
+      { text: '第三部分 · 工程', link: '/part3-engineering/15-scaffold', activeMatch: '/part3-engineering/' },
+      { text: '第四部分 · 进阶', link: '/part4-advanced/24-native-node', activeMatch: '/part4-advanced/' },
+      { text: '第五部分 · 实战', link: '/part5-projects/29-project-screenshot-recorder', activeMatch: '/part5-projects/' },
+      { text: '案例库', link: '/cases/01-zoom-white-screen', activeMatch: '/cases/' },
+      { text: 'Hub', items: [
+        { text: 'Examples 跟学用例', link: '/examples/' },
+        { text: '应用 Hub · 谁在用 Electron', link: '/hub/apps' },
+        { text: '资料 Hub · 权威与三方资料', link: '/hub/resources' },
+        { text: '学习路线图', link: '/appendix/roadmap' }
+      ] },
       { text: '官方文档', link: 'https://www.electronjs.org/docs/latest' }
     ],
 
     sidebar: {
-      '/guide/': [
+      '/part1-background/': [
         {
-          text: '认知篇 · 它是什么',
+          text: '第一部分 · 技术背景与认知体系',
           collapsed: false,
           items: [
-            { text: 'Electron 是什么', link: '/guide/01-what-is-electron' },
-            { text: '进程模型（核心）', link: '/guide/02-process-model' },
-            { text: '应用生命周期', link: '/guide/03-lifecycle' },
-            { text: '安全模型', link: '/guide/04-security' },
-            { text: 'IPC 通信', link: '/guide/05-ipc' }
+            { text: '01 · Electron 是什么', link: '/part1-background/01-what-is-electron' },
+            { text: '02 · 发展历史：从 Atom Shell 到今天', link: '/part1-background/02-history' },
+            { text: '03 · 技术架构剖析', link: '/part1-background/03-architecture' },
+            { text: '04 · 进程模型（核心）', link: '/part1-background/04-process-model' },
+            { text: '05 · 应用生命周期', link: '/part1-background/05-lifecycle' }
           ]
-        },
+        }
+      ],
+      '/part2-core/': [
         {
-          text: '实战篇 · 怎么开发',
+          text: '第二部分 · 核心知识体系',
           collapsed: false,
           items: [
-            { text: '窗口管理', link: '/guide/06-windows' },
-            { text: '系统能力', link: '/guide/07-system' },
-            { text: '数据与存储', link: '/guide/08-storage' },
-            { text: '嵌入 Web 内容', link: '/guide/09-webview' },
-            { text: '原生能力扩展', link: '/guide/10-native' }
+            { text: '06 · 新人第一课：第一个应用', link: '/part2-core/06-first-app' },
+            { text: '07 · 窗口体系', link: '/part2-core/07-windows' },
+            { text: '08 · 截屏与屏幕捕获', link: '/part2-core/08-screenshot' },
+            { text: '09 · IPC 通信', link: '/part2-core/09-ipc' },
+            { text: '10 · 安全模型', link: '/part2-core/10-security' },
+            { text: '11 · 系统能力', link: '/part2-core/11-system' },
+            { text: '12 · 存储架构', link: '/part2-core/12-storage' },
+            { text: '13 · 配置系统', link: '/part2-core/13-config' },
+            { text: '14 · 嵌入 Web 内容', link: '/part2-core/14-webview' }
           ]
-        },
+        }
+      ],
+      '/part3-engineering/': [
         {
-          text: '交付篇 · 到用户手里',
+          text: '第三部分 · 工程体系（完整生命周期）',
           collapsed: false,
           items: [
-            { text: '打包与分发', link: '/guide/11-packaging' },
-            { text: '签名与公证', link: '/guide/12-signing' },
-            { text: '自动更新与热修复', link: '/guide/13-updates' },
-            { text: 'CI/CD 与无头测试', link: '/guide/14-cicd' }
+            { text: '15 · 工程脚手架', link: '/part3-engineering/15-scaffold' },
+            { text: '16 · 调试体系', link: '/part3-engineering/16-debugging' },
+            { text: '17 · 测试实践', link: '/part3-engineering/17-testing' },
+            { text: '18 · 性能优化', link: '/part3-engineering/18-performance' },
+            { text: '19 · 打包与分发', link: '/part3-engineering/19-packaging' },
+            { text: '20 · 签名与公证', link: '/part3-engineering/20-signing' },
+            { text: '21 · 自动更新与热修复', link: '/part3-engineering/21-releases-updates' },
+            { text: '22 · CI/CD', link: '/part3-engineering/22-cicd' },
+            { text: '23 · 监控与可观测性', link: '/part3-engineering/23-observability' }
           ]
-        },
+        }
+      ],
+      '/part4-advanced/': [
         {
-          text: '保障篇 · 调试与守护',
+          text: '第四部分 · 关键组合技术',
           collapsed: false,
           items: [
-            { text: '调试体系', link: '/guide/15-debugging' },
-            { text: '性能优化', link: '/guide/16-performance' },
-            { text: '测试实践', link: '/guide/17-testing' },
-            { text: '监控与可观测性', link: '/guide/18-observability' }
+            { text: '24 · .node 扩展开发', link: '/part4-advanced/24-native-node' },
+            { text: '25 · 原生 SDK 集成架构', link: '/part4-advanced/25-sdk-integration' },
+            { text: '26 · 音视频与 RTC', link: '/part4-advanced/26-av-rtc' },
+            { text: '27 · Electron 定制', link: '/part4-advanced/27-customize' },
+            { text: '28 · 插件系统设计', link: '/part4-advanced/28-plugin-system' }
           ]
-        },
+        }
+      ],
+      '/part5-projects/': [
+        {
+          text: '第五部分 · 实战项目',
+          collapsed: false,
+          items: [
+            { text: '29 · 项目：截屏录屏工具', link: '/part5-projects/29-project-screenshot-recorder' },
+            { text: '30 · 项目：多窗口应用', link: '/part5-projects/30-project-multiwindow' }
+          ]
+        }
+      ],
+      '/examples/': [
+        {
+          text: 'Examples 跟学用例',
+          collapsed: false,
+          items: [
+            { text: '用例地图', link: '/examples/' },
+            { text: '01 · 最小窗口', link: '/examples/01-hello/' },
+            { text: '02 · 生命周期观察', link: '/examples/02-lifecycle/' },
+            { text: '03 · preload 与第一次 IPC', link: '/examples/03-preload-ipc/' },
+            { text: '04 · 右键菜单', link: '/examples/04-context-menu/' },
+            { text: '05 · 记住窗口位置', link: '/examples/05-window-state/' },
+            { text: '06 · 托盘常驻', link: '/examples/06-tray/' },
+            { text: '07 · 系统通知', link: '/examples/07-notification/' },
+            { text: '08 · 用户数据读写', link: '/examples/08-file-io/' },
+            { text: '09 · 给自己窗口截图', link: '/examples/09-capture-page/' },
+            { text: '10 · Deep Link 协议', link: '/examples/10-open-url/' },
+            { text: '11 · 单实例锁', link: '/examples/11-single-instance/' },
+            { text: '12 · 主进程网络请求', link: '/examples/12-net/' }
+          ]
+        }
+      ],
+      '/cases/': [
         {
           text: '案例库 · 踩坑实录',
           collapsed: false,
           items: [
-            { text: '缩放持久化白屏', link: '/guide/cases/01-zoom-white-screen' },
-            { text: 'GPU 崩溃五步分析法', link: '/guide/cases/02-gpu-crash' },
-            { text: 'setPosition 失效', link: '/guide/cases/03-setposition' },
-            { text: '多窗口关闭崩溃与升级决策', link: '/guide/cases/04-multi-window-crash' },
-            { text: '坐标系偏移', link: '/guide/cases/05-browserview-coords' },
-            { text: 'Apple Silicon 崩溃', link: '/guide/cases/06-apple-silicon' },
-            { text: '命令行开关不生效', link: '/guide/cases/07-flag-not-working' }
+            { text: '01 · 缩放持久化白屏', link: '/cases/01-zoom-white-screen' },
+            { text: '02 · GPU 崩溃五步分析法', link: '/cases/02-gpu-crash' },
+            { text: '03 · setPosition 失效', link: '/cases/03-setposition' },
+            { text: '04 · 多窗口关闭崩溃与升级决策', link: '/cases/04-multi-window-crash' },
+            { text: '05 · 坐标系偏移', link: '/cases/05-browserview-coords' },
+            { text: '06 · Apple Silicon 崩溃', link: '/cases/06-apple-silicon' },
+            { text: '07 · 命令行开关不生效', link: '/cases/07-flag-not-working' }
+          ]
+        }
+      ],
+      '/hub/': [
+        {
+          text: 'Hub',
+          collapsed: false,
+          items: [
+            { text: '应用 Hub · 谁在用 Electron', link: '/hub/apps' },
+            { text: '资料 Hub · 权威与三方资料', link: '/hub/resources' }
           ]
         }
       ],
@@ -106,8 +171,7 @@ export default defineConfig({
             { text: '学习路线图', link: '/appendix/roadmap' },
             { text: '命令行与环境变量速查', link: '/appendix/cli-reference' },
             { text: '版本策略与升级清单', link: '/appendix/versioning' },
-            { text: '术语表', link: '/appendix/glossary' },
-            { text: '官方资源索引', link: '/appendix/resources' }
+            { text: '术语表', link: '/appendix/glossary' }
           ]
         }
       ]

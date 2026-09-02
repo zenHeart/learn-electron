@@ -3,15 +3,15 @@ layout: home
 
 hero:
   name: "Learn Electron"
-  text: "从核心逻辑到生产实战"
-  tagline: "理解进程模型，就理解了一切 API 与一切坑。一篇篇读下去，你会得到一张覆盖窗口、IPC、打包、签名、更新、调试、性能的完整地图。"
+  text: "从新人到专家的完整书单"
+  tagline: "一本按架构组织的实战书：第一部分建立技术背景与认知体系，第二部分按新人真实场景由浅入深讲透核心知识，第三部分覆盖开发到上线维护的完整工程生命周期，第四部分深入 .node 扩展、Electron 定制与插件系统，第五部分用截屏录屏工具与多窗口工作台两个完整项目收束全书。配 12 个跟学用例与案例库，经验全部来自真实桌面客户端生产沉淀。"
   actions:
     - theme: brand
-      text: 从认知篇开始
-      link: /guide/01-what-is-electron
+      text: 从第一部分开始
+      link: /part1-background/01-what-is-electron
     - theme: alt
-      text: 直接看案例库
-      link: /guide/cases/01-zoom-white-screen
+      text: 跟学用例集
+      link: /examples/
     - theme: alt
       text: 学习路线图
       link: /appendix/roadmap
@@ -24,56 +24,78 @@ import OrbitHero from './.vitepress/theme/components/OrbitHero.vue'
 const groups = [
   {
     num: '01',
-    name: '认知篇',
-    desc: '它是什么、怎么工作的',
+    name: '第一部分 · 技术背景与认知',
+    desc: '它是什么、从哪来、怎么组装的',
     items: [
-      ['Electron 是什么', '/guide/01-what-is-electron', '三层本质与选型判断'],
-      ['进程模型', '/guide/02-process-model', '全站最重要的一章'],
-      ['应用生命周期', '/guide/03-lifecycle', '从 ready 到 quit 的事件流'],
-      ['安全模型', '/guide/04-security', '三开关的真实含义'],
-      ['IPC 通信', '/guide/05-ipc', '三种模式与安全封装']
+      ['Electron 是什么', '/part1-background/01-what-is-electron', '三层本质与选型'],
+      ['发展历史', '/part1-background/02-history', 'Atom Shell 到今天'],
+      ['技术架构剖析', '/part1-background/03-architecture', 'Chromium×Node 集成'],
+      ['进程模型', '/part1-background/04-process-model', '全书最重要一章'],
+      ['应用生命周期', '/part1-background/05-lifecycle', 'ready 到 quit']
     ]
   },
   {
     num: '02',
-    name: '实战篇',
-    desc: '怎么做出一个桌面应用',
+    name: '第二部分 · 核心知识体系',
+    desc: '新人真实场景，由浅入深',
     items: [
-      ['窗口管理', '/guide/06-windows', '多窗口架构与坐标系坑'],
-      ['系统能力', '/guide/07-system', '菜单/托盘/通知/协议'],
-      ['数据与存储', '/guide/08-storage', '分层存储与 safeStorage'],
-      ['嵌入 Web 内容', '/guide/09-webview', '三种嵌入方式选型'],
-      ['原生能力扩展', '/guide/10-native', 'N-API 与 SDK 集成']
+      ['新人第一课', '/part2-core/06-first-app', '第一个应用'],
+      ['窗口体系', '/part2-core/07-windows', '管理器/状态机/多账号'],
+      ['截屏与屏幕捕获', '/part2-core/08-screenshot', '三路径与权限'],
+      ['IPC 通信', '/part2-core/09-ipc', '生产封装工具箱'],
+      ['安全模型', '/part2-core/10-security', '三开关与基线清单'],
+      ['系统能力', '/part2-core/11-system', '菜单/托盘/深链'],
+      ['存储架构', '/part2-core/12-storage', '分层/partition'],
+      ['配置系统', '/part2-core/13-config', '四层/规则引擎'],
+      ['嵌入 Web 内容', '/part2-core/14-webview', '三方式选型']
     ]
   },
   {
     num: '03',
-    name: '交付篇',
-    desc: '从代码到用户手里',
+    name: '第三部分 · 工程体系',
+    desc: '开发→调试→测试→构建→签名→发布→观测',
     items: [
-      ['打包与分发', '/guide/11-packaging', 'builder vs forge'],
-      ['签名与公证', '/guide/12-signing', '远程签名架构'],
-      ['自动更新与热修复', '/guide/13-updates', '四层更新体系'],
-      ['CI/CD', '/guide/14-cicd', '无头测试与流水线']
+      ['工程脚手架', '/part3-engineering/15-scaffold', '目录/构建链/TS'],
+      ['调试体系', '/part3-engineering/16-debugging', '分进程调试地图'],
+      ['测试实践', '/part3-engineering/17-testing', 'Playwright'],
+      ['性能优化', '/part3-engineering/18-performance', '内存/启动/GPU'],
+      ['打包与分发', '/part3-engineering/19-packaging', 'builder vs forge'],
+      ['签名与公证', '/part3-engineering/20-signing', '远程签名'],
+      ['更新与热修复', '/part3-engineering/21-releases-updates', '四层体系'],
+      ['CI/CD', '/part3-engineering/22-cicd', '无头测试'],
+      ['监控可观测', '/part3-engineering/23-observability', '崩溃/指标']
     ]
   },
   {
     num: '04',
-    name: '保障篇',
-    desc: '调试、性能与监控',
+    name: '第四部分 · 关键组合技术',
+    desc: '.node 扩展 · 定制 · 插件',
     items: [
-      ['调试体系', '/guide/15-debugging', '分进程调试地图'],
-      ['性能优化', '/guide/16-performance', '内存/启动/GPU'],
-      ['测试实践', '/guide/17-testing', 'Playwright 实战'],
-      ['监控与可观测性', '/guide/18-observability', '崩溃采集与指标']
+      ['.node 扩展开发', '/part4-advanced/24-native-node', '从零写 addon'],
+      ['原生 SDK 集成', '/part4-advanced/25-sdk-integration', '放置与同构注入'],
+      ['音视频与 RTC', '/part4-advanced/26-av-rtc', '三渲染方案'],
+      ['Electron 定制', '/part4-advanced/27-customize', 'fuses/开关/源码'],
+      ['插件系统设计', '/part4-advanced/28-plugin-system', '四模式递进']
     ]
   },
   {
     num: '05',
-    name: '案例库',
-    desc: '现象 → 诊断 → 根因 → 修复',
+    name: '第五部分 · 实战项目',
+    desc: '全书知识合练',
     items: [
-      ['七个真实案例', '/guide/cases/01-zoom-white-screen', '白屏/GPU崩溃/坐标/升级']
+      ['截屏录屏工具', '/part5-projects/29-project-screenshot-recorder', '六轮迭代到发布'],
+      ['多窗口工作台', '/part5-projects/30-project-multiwindow', '窗口协作与账号隔离']
+    ]
+  },
+  {
+    num: '06',
+    name: 'Hub 与案例库',
+    desc: '用例 · 应用 · 资料 · 踩坑',
+    items: [
+      ['Examples 跟学用例', '/examples/', '12 个递进用例'],
+      ['应用 Hub', '/hub/apps', '谁在用 Electron'],
+      ['资料 Hub', '/hub/resources', '权威与三方资料'],
+      ['案例库', '/cases/01-zoom-white-screen', '七个真实坑']
     ]
   }
 ]
