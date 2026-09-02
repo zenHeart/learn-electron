@@ -1,0 +1,120 @@
+[     431ms] [INFO] Slow network is detected. See https://www.chromestatus.com/feature/5636954674692096 for more details. Fallback font will be used while loading: https://z-cdn.chatglm.cn/z-blog/Roboto-Regular.ttf @ https://z.ai/blog/glm-4.5:0
+[     431ms] [INFO] Slow network is detected. See https://www.chromestatus.com/feature/5636954674692096 for more details. Fallback font will be used while loading: https://z-cdn.chatglm.cn/z-blog/ReadexPro-VariableFont_HEXP,wght.ttf @ https://z.ai/blog/glm-4.5:0
+[     431ms] [INFO] Slow network is detected. See https://www.chromestatus.com/feature/5636954674692096 for more details. Fallback font will be used while loading: https://z-cdn.chatglm.cn/z-blog/Roboto-Italic.ttf @ https://z.ai/blog/glm-4.5:0
+[     431ms] [INFO] Slow network is detected. See https://www.chromestatus.com/feature/5636954674692096 for more details. Fallback font will be used while loading: https://z-cdn.chatglm.cn/z-blog/Roboto-Bold.ttf @ https://z.ai/blog/glm-4.5:0
+[    1442ms] TypeError: Cannot read properties of null (reading 'setAttribute')
+    at initTheme (https://chat.z.ai/space/z0sb56hrpna1-art:118:24)
+    at https://chat.z.ai/space/z0sb56hrpna1-art:138:4
+[    1373ms] [LOG] %c🚀 Welcome to Z.ai 🚀 color: #00d4ff; font-size: 20px; font-weight: bold; text-shadow: 0 0 10px #00d4ff; @ https://chat.z.ai/space/z0sb56hrpna1-art:203
+[    1373ms] [LOG] %c███████╗     █████╗ ██╗ color: #ff6b6b; font-family: monospace; font-size: 12px; @ https://chat.z.ai/space/z0sb56hrpna1-art:207
+[    1373ms] [LOG] %c╚══███╔╝    ██╔══██╗██║ color: #4ecdc4; font-family: monospace; font-size: 12px; @ https://chat.z.ai/space/z0sb56hrpna1-art:207
+[    1373ms] [LOG] %c  ███╔╝     ███████║██║ color: #45b7d1; font-family: monospace; font-size: 12px; @ https://chat.z.ai/space/z0sb56hrpna1-art:207
+[    1374ms] [LOG] %c ███╔╝      ██╔══██║██║ color: #f9ca24; font-family: monospace; font-size: 12px; @ https://chat.z.ai/space/z0sb56hrpna1-art:207
+[    1374ms] [LOG] %c███████╗ ██╗██║  ██║██║ color: #ff9ff3; font-family: monospace; font-size: 12px; @ https://chat.z.ai/space/z0sb56hrpna1-art:207
+[    1374ms] [LOG] %c╚══════╝ ╚═╝╚═╝  ╚═╝╚═╝ color: #6c5ce7; font-family: monospace; font-size: 12px; @ https://chat.z.ai/space/z0sb56hrpna1-art:207
+[    1374ms] [LOG]  @ https://chat.z.ai/space/z0sb56hrpna1-art:208
+[    1374ms] [LOG] %c✨ Advanced AI assistant powered by open-source GLM models color: #a29bfe; font-size: 14px; font-weight: bold; @ https://chat.z.ai/space/z0sb56hrpna1-art:209
+[    1374ms] [LOG] %c🧠 Supports text generation, reasoning, and deep research color: #fd79a8; font-size: 12px; @ https://chat.z.ai/space/z0sb56hrpna1-art:213
+[    1374ms] [LOG] %c🌍 Tailored for both English and Chinese users color: #00b894; font-size: 12px; @ https://chat.z.ai/space/z0sb56hrpna1-art:217
+[    1374ms] [LOG] %c💡 Free and open-source ChatGPT alternative color: #fdcb6e; font-size: 12px; @ https://chat.z.ai/space/z0sb56hrpna1-art:221
+[    1374ms] [LOG]  @ https://chat.z.ai/space/z0sb56hrpna1-art:225
+[    1374ms] [LOG] %c--- color: #ddd; @ https://chat.z.ai/space/z0sb56hrpna1-art:226
+[    1374ms] [LOG] %cPowered by ❤️ and lots of ☕ color: #e84393; font-size: 11px; font-style: italic; @ https://chat.z.ai/space/z0sb56hrpna1-art:227
+[    1374ms] [LOG]  @ https://chat.z.ai/space/z0sb56hrpna1-art:231
+[    1374ms] [LOG] %c🚀 Join us! We are hiring talented people! color: #00b894; font-size: 13px; font-weight: bold; @ https://chat.z.ai/space/z0sb56hrpna1-art:232
+[    1374ms] [LOG] %c💼 View jobs: https://zhipu-ai.jobs.feishu.cn/s/stmyTm5lxaU color: #0984e3; font-size: 12px; text-decoration: underline; @ https://chat.z.ai/space/z0sb56hrpna1-art:236
+[    1666ms] TypeError: Cannot read properties of null (reading 'setAttribute')
+    at initTheme (https://chat.z.ai/space/b0yb2613ybp0-art:118:24)
+    at https://chat.z.ai/space/b0yb2613ybp0-art:138:4
+[    1662ms] [LOG] %c🚀 Welcome to Z.ai 🚀 color: #00d4ff; font-size: 20px; font-weight: bold; text-shadow: 0 0 10px #00d4ff; @ https://chat.z.ai/space/b0yb2613ybp0-art:203
+[    1662ms] [LOG] %c███████╗     █████╗ ██╗ color: #ff6b6b; font-family: monospace; font-size: 12px; @ https://chat.z.ai/space/b0yb2613ybp0-art:207
+[    1662ms] [LOG] %c╚══███╔╝    ██╔══██╗██║ color: #4ecdc4; font-family: monospace; font-size: 12px; @ https://chat.z.ai/space/b0yb2613ybp0-art:207
+[    1662ms] [LOG] %c  ███╔╝     ███████║██║ color: #45b7d1; font-family: monospace; font-size: 12px; @ https://chat.z.ai/space/b0yb2613ybp0-art:207
+[    1663ms] [LOG] %c ███╔╝      ██╔══██║██║ color: #f9ca24; font-family: monospace; font-size: 12px; @ https://chat.z.ai/space/b0yb2613ybp0-art:207
+[    1663ms] [LOG] %c███████╗ ██╗██║  ██║██║ color: #ff9ff3; font-family: monospace; font-size: 12px; @ https://chat.z.ai/space/b0yb2613ybp0-art:207
+[    1663ms] [LOG] %c╚══════╝ ╚═╝╚═╝  ╚═╝╚═╝ color: #6c5ce7; font-family: monospace; font-size: 12px; @ https://chat.z.ai/space/b0yb2613ybp0-art:207
+[    1663ms] [LOG]  @ https://chat.z.ai/space/b0yb2613ybp0-art:208
+[    1663ms] [LOG] %c✨ Advanced AI assistant powered by open-source GLM models color: #a29bfe; font-size: 14px; font-weight: bold; @ https://chat.z.ai/space/b0yb2613ybp0-art:209
+[    1663ms] [LOG] %c🧠 Supports text generation, reasoning, and deep research color: #fd79a8; font-size: 12px; @ https://chat.z.ai/space/b0yb2613ybp0-art:213
+[    1663ms] [LOG] %c🌍 Tailored for both English and Chinese users color: #00b894; font-size: 12px; @ https://chat.z.ai/space/b0yb2613ybp0-art:217
+[    1663ms] [LOG] %c💡 Free and open-source ChatGPT alternative color: #fdcb6e; font-size: 12px; @ https://chat.z.ai/space/b0yb2613ybp0-art:221
+[    1663ms] [LOG]  @ https://chat.z.ai/space/b0yb2613ybp0-art:225
+[    1663ms] [LOG] %c--- color: #ddd; @ https://chat.z.ai/space/b0yb2613ybp0-art:226
+[    1663ms] [LOG] %cPowered by ❤️ and lots of ☕ color: #e84393; font-size: 11px; font-style: italic; @ https://chat.z.ai/space/b0yb2613ybp0-art:227
+[    1663ms] [LOG]  @ https://chat.z.ai/space/b0yb2613ybp0-art:231
+[    1663ms] [LOG] %c🚀 Join us! We are hiring talented people! color: #00b894; font-size: 13px; font-weight: bold; @ https://chat.z.ai/space/b0yb2613ybp0-art:232
+[    1663ms] [LOG] %c💼 View jobs: https://zhipu-ai.jobs.feishu.cn/s/stmyTm5lxaU color: #0984e3; font-size: 12px; text-decoration: underline; @ https://chat.z.ai/space/b0yb2613ybp0-art:236
+[    2167ms] TypeError: Cannot read properties of null (reading 'setAttribute')
+    at initTheme (https://chat.z.ai/space/t0ubc66pw1z0-art:118:24)
+    at https://chat.z.ai/space/t0ubc66pw1z0-art:138:4
+[    2138ms] [LOG] %c🚀 Welcome to Z.ai 🚀 color: #00d4ff; font-size: 20px; font-weight: bold; text-shadow: 0 0 10px #00d4ff; @ https://chat.z.ai/space/t0ubc66pw1z0-art:203
+[    2138ms] [LOG] %c███████╗     █████╗ ██╗ color: #ff6b6b; font-family: monospace; font-size: 12px; @ https://chat.z.ai/space/t0ubc66pw1z0-art:207
+[    2138ms] [LOG] %c╚══███╔╝    ██╔══██╗██║ color: #4ecdc4; font-family: monospace; font-size: 12px; @ https://chat.z.ai/space/t0ubc66pw1z0-art:207
+[    2138ms] [LOG] %c  ███╔╝     ███████║██║ color: #45b7d1; font-family: monospace; font-size: 12px; @ https://chat.z.ai/space/t0ubc66pw1z0-art:207
+[    2138ms] [LOG] %c ███╔╝      ██╔══██║██║ color: #f9ca24; font-family: monospace; font-size: 12px; @ https://chat.z.ai/space/t0ubc66pw1z0-art:207
+[    2138ms] [LOG] %c███████╗ ██╗██║  ██║██║ color: #ff9ff3; font-family: monospace; font-size: 12px; @ https://chat.z.ai/space/t0ubc66pw1z0-art:207
+[    2138ms] [LOG] %c╚══════╝ ╚═╝╚═╝  ╚═╝╚═╝ color: #6c5ce7; font-family: monospace; font-size: 12px; @ https://chat.z.ai/space/t0ubc66pw1z0-art:207
+[    2138ms] [LOG]  @ https://chat.z.ai/space/t0ubc66pw1z0-art:208
+[    2138ms] [LOG] %c✨ Advanced AI assistant powered by open-source GLM models color: #a29bfe; font-size: 14px; font-weight: bold; @ https://chat.z.ai/space/t0ubc66pw1z0-art:209
+[    2138ms] [LOG] %c🧠 Supports text generation, reasoning, and deep research color: #fd79a8; font-size: 12px; @ https://chat.z.ai/space/t0ubc66pw1z0-art:213
+[    2138ms] [LOG] %c🌍 Tailored for both English and Chinese users color: #00b894; font-size: 12px; @ https://chat.z.ai/space/t0ubc66pw1z0-art:217
+[    2138ms] [LOG] %c💡 Free and open-source ChatGPT alternative color: #fdcb6e; font-size: 12px; @ https://chat.z.ai/space/t0ubc66pw1z0-art:221
+[    2138ms] [LOG]  @ https://chat.z.ai/space/t0ubc66pw1z0-art:225
+[    2138ms] [LOG] %c--- color: #ddd; @ https://chat.z.ai/space/t0ubc66pw1z0-art:226
+[    2138ms] [LOG] %cPowered by ❤️ and lots of ☕ color: #e84393; font-size: 11px; font-style: italic; @ https://chat.z.ai/space/t0ubc66pw1z0-art:227
+[    2138ms] [LOG]  @ https://chat.z.ai/space/t0ubc66pw1z0-art:231
+[    2138ms] [LOG] %c🚀 Join us! We are hiring talented people! color: #00b894; font-size: 13px; font-weight: bold; @ https://chat.z.ai/space/t0ubc66pw1z0-art:232
+[    2138ms] [LOG] %c💼 View jobs: https://zhipu-ai.jobs.feishu.cn/s/stmyTm5lxaU color: #0984e3; font-size: 12px; text-decoration: underline; @ https://chat.z.ai/space/t0ubc66pw1z0-art:236
+[    2543ms] [INFO] Slow network is detected. See https://www.chromestatus.com/feature/5636954674692096 for more details. Fallback font will be used while loading: https://fonts.gstatic.com/s/materialicons/v145/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2 @ about:srcdoc:0
+[    2544ms] [INFO] Slow network is detected. See https://www.chromestatus.com/feature/5636954674692096 for more details. Fallback font will be used while loading: https://fonts.gstatic.com/s/materialicons/v145/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2 @ about:srcdoc:0
+[    2545ms] [INFO] Slow network is detected. See https://www.chromestatus.com/feature/5636954674692096 for more details. Fallback font will be used while loading: https://fonts.gstatic.com/s/materialicons/v145/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2 @ about:srcdoc:0
+[    2546ms] [INFO] Slow network is detected. See https://www.chromestatus.com/feature/5636954674692096 for more details. Fallback font will be used while loading: https://fonts.gstatic.com/s/materialicons/v145/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2 @ about:srcdoc:0
+[    2547ms] [INFO] Slow network is detected. See https://www.chromestatus.com/feature/5636954674692096 for more details. Fallback font will be used while loading: https://fonts.gstatic.com/s/materialicons/v145/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2 @ about:srcdoc:0
+[    2548ms] [INFO] Slow network is detected. See https://www.chromestatus.com/feature/5636954674692096 for more details. Fallback font will be used while loading: https://fonts.gstatic.com/s/materialicons/v145/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2 @ about:srcdoc:0
+[    4322ms] [LOG] [WeChat-Frontend-0i2ady] ===== 开始前端微信JS-SDK初始化 ===== @ https://chat.z.ai/space/z0sb56hrpna1-art:250
+[    4323ms] [LOG] [WeChat-Frontend-0i2ady] 当前页面URL: https://chat.z.ai/space/z0sb56hrpna1-art @ https://chat.z.ai/space/z0sb56hrpna1-art:251
+[    4323ms] [LOG] [WeChat-Frontend-0i2ady] 当前页面URL (去掉#): https://chat.z.ai/space/z0sb56hrpna1-art @ https://chat.z.ai/space/z0sb56hrpna1-art:252
+[    4324ms] [LOG] [WeChat-Frontend-0i2ady] 签名配置: {debug: false, appId: wxa5796e47c57570b1, timestamp: 1788340287, nonceStr: FJHKyARF1BVZYQqb, signature: 469344d0c3075610ccbdfa3d64abdcf02906cc75} @ https://chat.z.ai/space/z0sb56hrpna1-art:253
+[    4324ms] [LOG] [WeChat-Frontend-0i2ady] wx.config() 调用完成 @ https://chat.z.ai/space/z0sb56hrpna1-art:272
+[    4324ms] [LOG] [WeChat-Frontend-0i2ady] ===== 微信JS-SDK初始化完成 ===== @ https://chat.z.ai/space/z0sb56hrpna1-art:344
+[    4328ms] [LOG] [WeChat-Frontend-q24fe6] ===== 开始前端微信JS-SDK初始化 ===== @ https://chat.z.ai/space/t0ubc66pw1z0-art:250
+[    4328ms] [LOG] [WeChat-Frontend-q24fe6] 当前页面URL: https://chat.z.ai/space/t0ubc66pw1z0-art @ https://chat.z.ai/space/t0ubc66pw1z0-art:251
+[    4328ms] [LOG] [WeChat-Frontend-q24fe6] 当前页面URL (去掉#): https://chat.z.ai/space/t0ubc66pw1z0-art @ https://chat.z.ai/space/t0ubc66pw1z0-art:252
+[    4328ms] [LOG] [WeChat-Frontend-q24fe6] 签名配置: {debug: false, appId: wxa5796e47c57570b1, timestamp: 1788340287, nonceStr: m8j0FcX5WgJVJy2z, signature: 6712dd7afe7b37fdb606f7c1b47ed81fb39260b5} @ https://chat.z.ai/space/t0ubc66pw1z0-art:253
+[    4328ms] [LOG] [WeChat-Frontend-q24fe6] wx.config() 调用完成 @ https://chat.z.ai/space/t0ubc66pw1z0-art:272
+[    4328ms] [LOG] [WeChat-Frontend-q24fe6] ===== 微信JS-SDK初始化完成 ===== @ https://chat.z.ai/space/t0ubc66pw1z0-art:344
+[    4330ms] [LOG] [WeChat-Frontend-sb8flx] ===== 开始前端微信JS-SDK初始化 ===== @ https://chat.z.ai/space/b0yb2613ybp0-art:250
+[    4330ms] [LOG] [WeChat-Frontend-sb8flx] 当前页面URL: https://chat.z.ai/space/b0yb2613ybp0-art @ https://chat.z.ai/space/b0yb2613ybp0-art:251
+[    4330ms] [LOG] [WeChat-Frontend-sb8flx] 当前页面URL (去掉#): https://chat.z.ai/space/b0yb2613ybp0-art @ https://chat.z.ai/space/b0yb2613ybp0-art:252
+[    4330ms] [LOG] [WeChat-Frontend-sb8flx] 签名配置: {debug: false, appId: wxa5796e47c57570b1, timestamp: 1788340287, nonceStr: kzhNJ6gF9tucMLqh, signature: cd669a42150fabcdf05842f354a5e0247118272a} @ https://chat.z.ai/space/b0yb2613ybp0-art:253
+[    4330ms] [LOG] [WeChat-Frontend-sb8flx] wx.config() 调用完成 @ https://chat.z.ai/space/b0yb2613ybp0-art:272
+[    4330ms] [LOG] [WeChat-Frontend-sb8flx] ===== 微信JS-SDK初始化完成 ===== @ https://chat.z.ai/space/b0yb2613ybp0-art:344
+[    4574ms] [LOG] Wed Sep 02 2026 17:11:30 GMT+0800 (China Standard Time) @ https://o.alicdn.com/frontend-lib/common-lib/jquery.min.js:0
+[    4620ms] [LOG] Wed Sep 02 2026 17:11:30 GMT+0800 (China Standard Time) @ https://o.alicdn.com/frontend-lib/common-lib/jquery.min.js:0
+[    4726ms] [LOG] Wed Sep 02 2026 17:11:30 GMT+0800 (China Standard Time) @ https://o.alicdn.com/frontend-lib/common-lib/jquery.min.js:0
+[    4844ms] [ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ https://chat.z.ai/api/v1/users/user/settings:0
+[    4844ms] [ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ https://chat.z.ai/api/models:0
+[    4893ms] [ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ https://chat.z.ai/api/v1/users/user/settings:0
+[    4915ms] [ERROR] Failed to load resource: net::ERR_BLOCKED_BY_CLIENT @ https://stats.g.doubleclick.net/g/collect?v=2&tid=G-Z8QTHYBHP3&cid=940844485.1786756867&gtm=45je68v1v9218837095za200zd9218837095&rcb=11&aip=1&dma=0&gcd=13l3l3l3l1l1&npa=0&frm=2&tag_exp=115938466~115938469~118897920~118897930~120213116~120385423~120412528:0
+[    4929ms] [ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ https://chat.z.ai/api/models:0
+[    4991ms] [ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ https://chat.z.ai/api/v1/users/user/settings:0
+[    5032ms] [LOG] {detail: 401 Unauthorized} @ https://z-cdn.chatglm.cn/z-ai/frontend/prod-fe-1.1.92/assets/index-CrxzZnYM.js:61
+[    5033ms] [WARNING] Failed to load models {detail: 401 Unauthorized} @ https://z-cdn.chatglm.cn/z-ai/frontend/prod-fe-1.1.92/assets/index-CrxzZnYM.js:2195
+[    5082ms] [LOG] {detail: 401 Unauthorized} @ https://z-cdn.chatglm.cn/z-ai/frontend/prod-fe-1.1.92/assets/index-CrxzZnYM.js:61
+[    5082ms] [WARNING] Failed to load models {detail: 401 Unauthorized} @ https://z-cdn.chatglm.cn/z-ai/frontend/prod-fe-1.1.92/assets/index-CrxzZnYM.js:2195
+[    5086ms] [ERROR] Failed to load resource: net::ERR_BLOCKED_BY_CLIENT @ https://static.ads-twitter.com/uwt.js:0
+[    5086ms] [ERROR] Failed to load resource: net::ERR_BLOCKED_BY_CLIENT @ https://static.ads-twitter.com/uwt.js:0
+[    5086ms] [ERROR] Failed to load resource: net::ERR_BLOCKED_BY_CLIENT @ https://static.ads-twitter.com/uwt.js:0
+[    5142ms] [ERROR] Failed to load resource: the server responded with a status of 401 (Unauthorized) @ https://chat.z.ai/api/models:0
+[    5143ms] [LOG] {detail: 401 Unauthorized} @ https://z-cdn.chatglm.cn/z-ai/frontend/prod-fe-1.1.92/assets/index-CrxzZnYM.js:61
+[    5143ms] [WARNING] Failed to load models {detail: 401 Unauthorized} @ https://z-cdn.chatglm.cn/z-ai/frontend/prod-fe-1.1.92/assets/index-CrxzZnYM.js:2195
+[    5477ms] Failed to read the 'localStorage' property from 'Window': The document is sandboxed and lacks the 'allow-same-origin' flag.
+[    5958ms] [WARNING] [Meta Pixel] - Duplicate Pixel ID: 1921933375117245. @ https://connect.facebook.net/en_US/fbevents.js:201
+[    6041ms] [WARNING] [Meta Pixel] - Duplicate Pixel ID: 1921933375117245. @ https://connect.facebook.net/en_US/fbevents.js:201
+[    6127ms] [WARNING] [Meta Pixel] - Duplicate Pixel ID: 1921933375117245. @ https://connect.facebook.net/en_US/fbevents.js:201
+[    6172ms] [ERROR] Failed to load resource: net::ERR_BLOCKED_BY_CLIENT @ https://stats.g.doubleclick.net/g/collect?v=2&tid=G-9HHB4R5K1T&cid=940844485.1786756867&gtm=45je68v1v9228989032z89228988000za20gzb9228988000zd9228988000&rcb=5&aip=1&dma=0&gcd=13l3l3l3l1l1&npa=0&frm=2&tag_exp=115938465~115938469~118897920~118897930~119318177~120213116~120385422:0
+[    6467ms] [ERROR] Failed to load resource: net::ERR_BLOCKED_BY_CLIENT @ https://stats.g.doubleclick.net/g/collect?v=2&tid=G-SF8X67RPF9&cid=940844485.1786756867&gtm=45je68v1v9228990254za20gzb9228988000zd9228988000&rcb=18&aip=1&dma=0&gcd=13l3l3l3l1l1&npa=0&frm=2&tag_exp=115938466~115938469~118897920~118897930~119318177~120385422:0
+[   10678ms] [WARNING] cdn.tailwindcss.com should not be used in production. To use Tailwind CSS in production, install it as a PostCSS plugin or use the Tailwind CLI: https://tailwindcss.com/docs/installation @ https://artifacts-cdn.chatglm.site/https://cdn.tailwindcss.com:63
+[   10681ms] [ERROR] Blocked autofocusing on a <input> element in a cross-origin subframe. @ about:srcdoc:349
+[   10747ms] SecurityError: Failed to read the 'localStorage' property from 'Window': The document is sandboxed and lacks the 'allow-same-origin' flag.
+    at HTMLDocument.<anonymous> (about:srcdoc:459:13)
