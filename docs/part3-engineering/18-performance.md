@@ -191,6 +191,36 @@ requestAnimationFrame(draw)
 **技巧二 · 强制重新合成**：`document.body.style.transform = 'scale(1)'` 触发整页重合成，旧合成层（常驻弹窗、轮播图累积出来的）被丢弃，idle 时恢复。配合 `webFrame.clearCache()` + 主进程 `webContents.clearCodeCache()` 是一组「页面级 GC」组合拳。
 :::
 
+### 虚拟滚动的生产实现要点
+
+工具箱第 3 条「长列表虚拟滚动」值得单独立节：聊天会话动辄上万条消息，不做虚拟化，渲染进程内存与 Layout 耗时会同时失控。开源虚拟列表直接 `npm install` 往往不够用，生产实现与开源默认值的差距集中在这四处：
+
+**① 视图池回收，而非销毁重建。** 滚出视口的条目不 destroy，而是 `position: absolute; top: -9999px` 移出视口、按类型分池存进 `unusedViews`（`Map<type, View[]>`），新条目优先从池里取。滚动全程 DOM 数量恒定 ≈ 视口可见数 + 200px buffer——destroy/create 引发的 GC 抖动，是滚动掉帧的隐形来源。
+
+**② 变高列表用前缀和 + 二分。** 等高列表 startIndex 直接 `Math.floor(scrollTop / itemSize)`，但聊天消息高矮不一（文字/图片/引用混排）。标准做法：维护 sizes 前缀和数组（`sums[i]` = 前 i 条总高度），startIndex 二分查找「第一个 `sums[i] > scrollTop`」的 i，endIndex 从 startIndex 线性向后推到超出视口底边为止。条目真实高度测量后回写 sums，之后的定位即精确。
+
+**③ rAF 合并滚动更新。** scroll 事件一帧可能触发多次，直接在 handler 里重排会堆叠计算。把「标记脏 → rAF 里统一重算」合并；再配一个廉价短路：本次位移小于一个最小 itemSize 时，整轮跳过。
+
+**④ 聊天场景的三个特化**（以下来自真实项目 fork 开源虚拟列表后的差集）：
+
+- **触底自动加载**：`scrollTop + clientHeight + 35px >= scrollHeight` 即拉取历史消息——35px 提前量让加载在用户看到「到底了」之前启动，再配 1 秒节流防连发。
+- **少数据置底填充**：消息不满一屏时，原生滚动会「钉在顶部」，而聊天要求新消息贴底。解法是给列表容器加动态 `marginTop = max(0, 容器高 - 内容高)`，把内容整体顶到最下方——纯 CSS 钉底，不碰 scrollTop。
+- **动态高度滚到底的竞态**：`scrollToBottom` 执行时最后几条消息的高度还没测量完，一次 `scrollTop = scrollHeight` 会停在半路。竞态处理是 rAF 循环重设，直到尺寸稳定：
+
+```js
+function scrollToBottomStable(el) {
+  let lastHeight = 0, rounds = 0
+  const tick = () => {
+    el.scrollTop = el.scrollHeight       // 上面条目高度逐步收敛，会不断推高 scrollHeight
+    if (el.scrollHeight !== lastHeight && ++rounds < 30) {
+      lastHeight = el.scrollHeight
+      requestAnimationFrame(tick)        // 尺寸仍在变就继续；连续稳定即停
+    }
+  }
+  requestAnimationFrame(tick)
+}
+```
+
 ### 后台运行的降载策略
 
 默认 `backgroundThrottling` 会在窗口失焦时降计时器频率——但如果你**需要**后台持续运行（加速器、挂机工具），要关掉它换来自建精细控制：

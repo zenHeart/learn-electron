@@ -468,6 +468,40 @@ win.on('resize', onResize)
 **2. 抽象一个窗口基类，对抗窗口管理代码爆炸。** 窗口超过 5 个就该收敛了：统一的 `create()`（show:false + ready-to-show + 状态恢复）、统一的 `safeClose()`（确认弹窗 + 清理定时器）、统一的命名注册表（流派二的 PRESETS 就是最小形态）。所有窗口共用一份生命周期代码，新增窗口只加配置。
 :::
 
+### 案例：生产级消息悬浮窗的四个设计点
+
+桌面 IM 客户端右上角的消息浮窗是本章知识的综合考场：它要出现得毫无延迟、消息高峰不被打垮、对端死了能知道、自己崩了能爬起来。四个设计点逐一拆解：
+
+**设计点一：预建单例 + showInactive——「动画」是假象，预加载才是真相。** 浮窗在应用启动时就完成创建与加载，并把 loadPromise 存在实例上，后续所有逻辑 `await` 同一个 promise；消息到来时只调 `showInactive()`——显示但不抢焦点。用户感受到的「丝滑弹出」，本质是零延迟的 show/hide，不是 CSS 过渡动画：等动画跑完再出场，浮窗永远比用户的阅读速度慢半拍。**浮窗体验靠预加载，而不是靠动画**——这条结论适用于一切「被动出现」的窗口。
+
+::: exp
+`show()` 会把键盘焦点抢到浮窗——用户正在打字的输入框瞬间失焦，这是浮窗类窗口最遭投诉的细节。凡是被动出现的窗口（通知、消息预览、日程提醒）一律 `showInactive()`；只有用户主动触发的弹窗才用 `show()`。
+:::
+
+**设计点二：MessageChannelMain 端口直连——消息洪峰不过主进程。** 业务页与浮窗的通信若走「渲染进程 → 主进程 → 浮窗」两跳，消息高峰期主进程会被纯转发流量打满。用 [IPC 章](/part2-core/09-ipc)模式三的端口直连：主进程只做一次端口交换，此后两端点对点：
+
+```js
+// 主进程：浮窗就绪后做一次端口交换，然后离场
+ipcMain.once('float:connect', (e) => {
+  const { port1, port2 } = new MessageChannelMain()
+  floatWin.webContents.postMessage('float:port', null, [port1])
+  e.sender.postMessage('float:port', null, [port2])  // e.sender：发起连接的业务页
+})
+```
+
+```js
+// 渲染侧：按会话 id 分桶存 port，port 关闭时清桶
+const ports = new Map()                          // sessionId → MessagePort
+onPort((port, { sessionId }) => {
+  ports.set(sessionId, port)
+  port.onclose = () => ports.delete(sessionId)   // 对端重建后会发来新 port，旧 port 必须清掉
+})
+```
+
+**设计点三：应用层心跳——进程事件探不到的死亡。** 浮窗内嵌的会话页面可能被操作系统直接回收而不触发任何 Electron 进程事件——框架层看起来一切正常，对面其实已是僵尸。靠应用层心跳兜底：每 30 分钟发一次 ping，3 秒无 pong 即上报「会话假死」。进程级事件管崩溃，应用层心跳管「活着但没反应」，两层探测缺一不可。
+
+**设计点四：崩溃自愈——reload 之后重建全部端口。** 浮窗渲染进程 `render-process-gone` 后，设计点二建立的端口全部作废。自愈链：`reload()` → 等 `did-finish-load` → 重做全部端口交换 → 恢复心跳。短时间二次崩溃说明不是偶发，弹 dialog 告知用户后 `app.relaunch()`。完整的崩溃分级决策树见[监控章节](/part3-engineering/23-observability)。
+
 ## 坑位警报
 
 ::: pitfall

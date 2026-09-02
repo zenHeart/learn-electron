@@ -88,6 +88,49 @@ ipcMain.handle('shot:capture', async () => {
 
 直接采用 [08 章](/part2-core/08-screenshot)的区域选择骨架：每屏透明全屏窗 → 框选回传 rect → 按 scaleFactor 换算裁剪。这一迭代最容易踩 DPI 坑——低分屏选区的坐标直接用到高分屏截图上会偏移，裁剪前 `rect.x *= display.scaleFactor`。
 
+### 迭代 3.5：编辑器内核（标注工具的实现原理）
+
+截屏工具的护城河在编辑器。以下内核设计来自生产 SDK（泛化摘录），四个组件够撑起一个完整标注工具：
+
+**① 双层 History 栈（undo/redo 的正解）**——「一次创建」与「一次修改」分型，撤销只是移动游标：
+
+```ts
+enum HistoryItemType { Edit, Source }
+
+// Source：创建型操作（一个矩形/一笔画笔/一个文字），自带 draw 函数
+interface HistoryItemSource<S, E> {
+  type: HistoryItemType.Source
+  data: S                                   // 坐标/颜色/点集
+  editHistory: HistoryItemEdit<E, S>[]      // 事后每次移动/缩放的增量
+  draw: (ctx, action) => void               // 把自己画上 canvas
+  isHit?: (ctx, action, point) => boolean   // 命中检测（选中已有图形用）
+}
+// Edit：修改型操作，只记位移增量 (x1,y1)→(x2,y2)，指回它的 Source
+// History = { index, stack }——undo/redo = 移动 index；
+// undo 到 Edit 时同步从 source.editHistory pop；重绘 = stack.slice(0, index+1).forEach(i => i.draw())
+```
+
+**② 马赛克 = 取色块平铺**（零滤镜 API 依赖）：鼠标轨迹每隔 `size` 步长取一次原图像素色，`fillRect` 画实心方块——效果等价网格化取色，且天然作为一条 Source 进 History 可撤销。
+
+**③ 文字 = DOM 输入 + canvas 持久化双轨**：点击处挂真实 `textarea`（原生输入法体验），blur 时有内容才 push 进 History；渲染时逐行 `ctx.fillText`，`fontFamily` 取自 canvas 的 computedStyle 保证与输入框一致。
+
+**④ 合成导出三细节**（选区原图 + 全部标注重放，一次离屏绘制）：
+
+```ts
+canvas.width = bounds.width * devicePixelRatio    // 1. 尺寸乘 DPR，retina 不糊
+canvas.height = bounds.height * devicePixelRatio
+ctx.setTransform(dpr, 0, 0, dpr, 0, 0)            // 标注按 DPR 缩放
+ctx.imageSmoothingQuality = 'low'                 // 2. 反直觉：'high' 反而模糊（源已是目标分辨率）
+const rx = image.naturalWidth / displayWidth      // 3. rx/ry 把 DIP 选区映射回源图物理像素
+ctx.drawImage(image,
+  bounds.x * rx, bounds.y * rx, bounds.width * rx, bounds.height * rx,  // 源：物理像素
+  0, 0, bounds.width, bounds.height)                                     // 目标：选区尺寸
+history.stack.slice(0, history.index + 1).forEach(i => i.type === Source && i.draw(ctx, i))
+canvas.toBlob(resolve, 'image/png')
+```
+
+交互约定补充：双击 = 确认（有选区导选区、无选区导整屏）、右键 = 取消；放大镜用 100×80 小 canvas 按**原图物理像素 1:1** 画鼠标周围区域（等效放大）+ 中心点取色显示 HEX。
+
 ### 迭代 4：录屏（MediaRecorder 管线）
 
 ```js

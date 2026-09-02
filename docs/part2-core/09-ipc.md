@@ -265,6 +265,29 @@ const IPC = {
 通道命名不必一步到位，但**新代码必须走「域前缀 + 枚举常量」**，老通道在路过时顺手迁移。类型安全同理：先用 TS 类型约束 preload 暴露的 API 签名（渲染层 `window.api` 的 `.d.ts`），通道 payload 类型可以后补——把类型定义集中在桥接层，业务层永远只见类型化接口。
 :::
 
+::: pitfall 坑位警报（多 webview 架构与契约文档）
+**① 多 webview 架构里，「发送」有两条总线。** 嵌入 webview 的页面（见[嵌入 Web 内容](/part2-core/14-webview)）里有两个长得几乎一样的发送 API，走向完全不同：
+
+```js
+ipcRenderer.send('msg:new', payload)       // 总线一：webview → 主进程，ipcMain.on 收
+ipcRenderer.sendToHost('msg:new', payload) // 总线二：webview → 宿主页，webview 的 ipc-message 事件收
+```
+
+| API | 起点 | 终点 | 谁在监听 |
+|---|---|---|---|
+| `send` | webview 内 preload | 主进程 | `ipcMain.on` |
+| `sendToHost` | webview 内 preload | 宿主页（embedder） | `webview` 元素的 `ipc-message` 事件 |
+
+频道命名约定必须显式标注「谁收」（如 `toMain:msg:new` / `toHost:msg:new`），否则桥接层 API 面里每个导出函数都藏着一条「该走哪条总线」的隐式知识——调用方必然踩错，且报错形态是「消息石沉大海」而不是显式异常：总线选错了谁也不会抛错，只是收件方永远等不到，排查代价极高。
+
+**② 壳桥契约的 API 面要有单一事实源。** 壳桥 SDK（壳暴露给 Web 侧的能力契约）的文档一旦手写就会漂移。真实项目复盘出的两种漂移形态：
+
+- **文档超前于实现**：README 声明了 3 个早已删除的 API——调用方按文档接入，线上直接「通道不存在」；
+- **实现游离于契约**：契约提供方的参照实现活在另一个包的 demo 里，契约本身没有任何可执行的真相，实际行为以 demo 为准却无人声明。
+
+正解是**契约文档从类型定义生成**，而不是手写：类型即单一事实源，API 增删在类型上先行、文档随代码同 MR 变更，README 只留用法示例；再配一条 CI 校验「文档快照与类型定义一致」，漂移在合入阶段被拦下，而不是等调用方在线上撞墙。
+:::
+
 ::: pitfall 坑位警报
 三个常见坑：
 1. **preload 里透传 ipcRenderer**（`exposeInMainWorld('ipc', ipcRenderer)`）等于放弃所有安全边界——渲染进程被 XSS 后攻击者可调用任意通道。

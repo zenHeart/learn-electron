@@ -85,7 +85,116 @@ const dataUrl = canvas.toDataURL('image/png')
 track.stop()   // 截完即停，别占着采集管线
 ```
 
-## 三、macOS 屏幕权限：最容易翻车的一环
+## 三、生产级方案解剖：整屏快照 + Web 编辑器
+
+真实的截屏工具（截图带标注、取色、马赛克的完整产品）怎么架构？以下解剖一个生产 SDK 的完整设计（已泛化），它验证了一条重要结论：**采集在主进程，编辑在 Web 层**。
+
+### 先看选型：三种方案的取舍
+
+| 方案 | 做法 | 代价 | 适用 |
+|---|---|---|---|
+| 唤起系统截屏 | 调系统自带截图 | UI 不可定制、无标注能力 | 能接受原生体验的简单需求 |
+| 原生模块截屏 | C++/Rust `.node` 直接调系统 API | 开发成本高、跨平台矩阵维护重 | 需要实时帧/跨屏连续操作（大厂 IM 常用） |
+| **渲染进程截屏**（本方案） | 主进程截整屏快照 → Web 编辑器框选/标注/导出 | 快照非实时；一次只处理一个屏 | 绝大多数「截图+标注」场景 |
+
+「快照非实时、单屏操作」这两个限制对消息截图类场景完全无感，换来的是**编辑器整套在 Web 层开发，甚至能脱离 Electron 在纯浏览器里调试**——用场景约束换实现成本的教科书案例。
+
+### 三层分工与数据流
+
+```text
+主进程（采集 + 窗口 + 系统能力）
+  ├─ desktopCapturer 整屏快照 → dataURL
+  ├─ 透明全屏窗（预创建隐藏）+ 常驻编辑器视图
+  ├─ 剪贴板写入 / 保存对话框 / 全局快捷键（仅激活期占用）
+preload（contextBridge 白名单）
+  └─ ready / ok / save / cancel / on / off 六个方法
+Web 编辑器（React/Vue 均可）
+  └─ 背景图+遮罩 → 框选 → 矩形/箭头/画笔/文字/马赛克 → canvas 合成 PNG
+```
+
+**图片的跨程往返**（方向不同、形态不同）：
+
+```js
+// 去程（主→编辑器）：dataURL 字符串直接推
+view.webContents.send('capture', display, imageUrl)
+
+// 回程（编辑器→主）：Blob → ArrayBuffer → Buffer
+// preload：
+ok: (arrayBuffer, data) => ipcRenderer.send('ok', Buffer.from(arrayBuffer), data)
+// 主进程：
+ipcMain.on('ok', (_e, buffer, { bounds, display }) => {
+  clipboard.writeImage(nativeImage.createFromBuffer(buffer))   // 写剪贴板
+})
+```
+
+### 取流细节：三处必踩的坑一次讲清
+
+```js
+// 1. thumbnailSize 必须乘 scaleFactor——不传默认 150×150，得到的是模糊缩略图
+const sources = await desktopCapturer.getSources({
+  types: ['screen'],
+  thumbnailSize: {
+    width: display.width * display.scaleFactor,    // 逻辑像素 × 缩放比 = 物理像素
+    height: display.height * display.scaleFactor,
+  },
+})
+const imageUrl = sources[0].thumbnail.toDataURL()  // 快照即成品，无需 getUserMedia
+
+// 2. 显示器定位：以光标所在屏为准（用户想截哪块屏，鼠标先移过去）
+const point = screen.getCursorScreenPoint()
+const { id, bounds, scaleFactor } = screen.getDisplayNearestPoint(point)
+
+// 3. bounds 一律 Math.floor——高分屏下 DIP 坐标可能是小数，
+//    直接 setBounds 会产生半像素模糊
+```
+
+source 与 display 的匹配在 Linux 上有特判：`display_id` 可能为空，退化用 `source.id` 的 `screen:{id}:` 前缀匹配；单屏时直接取第一个。
+
+### 防御式 IPC：握手与超时竞速
+
+主进程与编辑器视图是异步加载关系，直接发消息会丢：
+
+```js
+// 握手：编辑器加载完成才 resolve，后续操作全部 await 它
+this.isReady = new Promise(resolve => {
+  ipcMain.once('ready', () => resolve())
+})
+// 触发截屏时，取流与握手并行——两件事都好了才显示窗口（首屏体验关键）
+const [imageUrl] = await Promise.all([this.capture(display), this.isReady])
+
+// 重置选区：IPC 回执与 100ms 超时竞速——渲染层即使卡死也不阻塞主进程
+await Promise.race([
+  new Promise(resolve => setTimeout(resolve, 100)),
+  new Promise(resolve => ipcMain.once('reset-done', resolve)),
+])
+```
+
+### 跨平台窗口参数：每行注释都是一个真实 bug
+
+承载编辑器的透明全屏窗，生产级参数防御（直接抄走可省一轮踩坑）：
+
+```js
+new BrowserWindow({
+  x: display.x, y: display.y, width: display.width, height: display.height,
+  type: { darwin: 'panel', win32: 'toolbar', linux: undefined }[process.platform],
+  // linux 的 type 必须为 undefined，否则部分系统不触发 focus 事件
+  frame: false, transparent: true,
+  focusable: true,   // 必须为 true——否则 Esc 不响应、输入框不能输入
+  skipTaskbar: true, alwaysOnTop: true,
+  fullscreen: false, // linux 必须为 false 才能全屏置顶；mac 为 false 防程序坞不恢复
+  fullscreenable: false,  // mac 设 true 会崩溃
+  hasShadow: false, backgroundColor: '#00000000',
+  acceptFirstMouse: true, // mac：点击即激活并收到事件
+  show: false,            // 预创建但隐藏——快捷键按下时窗口已就绪
+})
+// 结束顺序敏感：先 setAlwaysOnTop(false) + setKiosk(false)，再 unmaximize 才有效
+```
+
+::: exp 实战经验（截屏 SDK 的三个工程设计）
+①**预创建隐藏窗口 + 常驻编辑器视图**：窗口与编辑器 JS 上下文、图片解码器全程热着，快捷键到可交互接近零延迟——结束后只移除视图不销毁；②**全局快捷键只在激活期占用**：`startCapture` 动态注册 Esc、`endCapture` 注销，并先判 `$win.isFocused()`——系统级快捷键是稀缺资源，不要常驻；③**失败绝不带崩主进程**：整个触发链 try/catch + 埋点钩子（trigger/ok/cancel/save/error 全打点），截屏挂了应用不能挂。
+:::
+
+## 四、macOS 屏幕权限：最容易翻车的一环
 
 macOS 10.15+ 截取屏幕必须获得「屏幕录制」权限——**没有弹窗主动请求的 API**，需要引导用户去系统设置开启：
 
@@ -124,7 +233,7 @@ function checkScreenPermission() {
 | 摄像头 | askForMediaAccess + Info.plist 声明 | 无系统级 | 视桌面环境 |
 | 音频环回（录系统声） | 不支持（需虚拟音频驱动，如 BlackHole） | 默认采集（`chromeMediaSource: 'desktop'` 的 audio） | PulseAudio monitor |
 
-## 四、区域截图交互：选择框的实现骨架
+## 五、区域截图交互：选择框的实现骨架
 
 做一个「截图工具」（用户拖框选区域）的骨架——透明全屏窗 + 蒙层 + 框选，多屏时每屏一窗：
 
@@ -160,7 +269,7 @@ function startRegionCapture(onDone) {
 3. **Electron 版本升级后 sources 的 id 格式变化**——`window:xx:0` / `screen:xx:0` 前缀是 Chromium 内部实现，别持久化解析它，每次实时枚举。
 :::
 
-## 五、路径三：原生采集（衔接 RTC）
+## 六、路径三：原生采集（衔接 RTC）
 
 帧率敏感场景（游戏内截屏直播、高频录屏）下，JS 层 `getUserMedia` 的延迟与 CPU 开销成为瓶颈——生产方案是原生层直接接系统采集 API（Windows DXGI Desktop Duplication、macOS ScreenCaptureKit），帧数据不过 JS 或最小化过桥。集成模式与 SDK 进程放置见[音视频与 RTC](/part4-advanced/26-av-rtc)与[原生集成](/part4-advanced/25-sdk-integration)。
 
