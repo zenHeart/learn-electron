@@ -31,11 +31,13 @@ export default defineConfig({
     logo: '/logo.svg',
 
     nav: [
-      { text: '第一部分 · 背景', link: '/part1-background/01-what-is-electron', activeMatch: '/part1-background/' },
-      { text: '第二部分 · 核心', link: '/part2-core/06-first-app', activeMatch: '/part2-core/' },
-      { text: '第三部分 · 工程', link: '/part3-engineering/15-scaffold', activeMatch: '/part3-engineering/' },
-      { text: '第四部分 · 进阶', link: '/part4-advanced/24-native-node', activeMatch: '/part4-advanced/' },
-      { text: '第五部分 · 实战', link: '/part5-projects/29-project-screenshot-recorder', activeMatch: '/part5-projects/' },
+      { text: '教程', items: [
+        { text: '第一部分 · 技术背景与认知', link: '/part1-background/01-what-is-electron' },
+        { text: '第二部分 · 核心知识体系', link: '/part2-core/06-first-app' },
+        { text: '第三部分 · 工程体系', link: '/part3-engineering/15-scaffold' },
+        { text: '第四部分 · 关键组合技术', link: '/part4-advanced/24-native-node' },
+        { text: '第五部分 · 实战项目', link: '/part5-projects/29-project-screenshot-recorder' }
+      ] },
       { text: '案例库', link: '/cases/01-zoom-white-screen', activeMatch: '/cases/' },
       { text: 'Hub', items: [
         { text: 'Examples 跟学用例', link: '/examples/' },
@@ -47,9 +49,9 @@ export default defineConfig({
     ],
 
     sidebar: {
-      '/part1-background/': [
+      '/': [
         {
-          text: '第一部分 · 技术背景与认知体系',
+          text: '第一部分 · 技术背景与认知',
           collapsed: false,
           items: [
             { text: '01 · Electron 是什么', link: '/part1-background/01-what-is-electron' },
@@ -58,9 +60,7 @@ export default defineConfig({
             { text: '04 · 进程模型（核心）', link: '/part1-background/04-process-model' },
             { text: '05 · 应用生命周期', link: '/part1-background/05-lifecycle' }
           ]
-        }
-      ],
-      '/part2-core/': [
+        },
         {
           text: '第二部分 · 核心知识体系',
           collapsed: false,
@@ -75,9 +75,7 @@ export default defineConfig({
             { text: '13 · 配置系统', link: '/part2-core/13-config' },
             { text: '14 · 嵌入 Web 内容', link: '/part2-core/14-webview' }
           ]
-        }
-      ],
-      '/part3-engineering/': [
+        },
         {
           text: '第三部分 · 工程体系（完整生命周期）',
           collapsed: false,
@@ -92,9 +90,7 @@ export default defineConfig({
             { text: '22 · CI/CD', link: '/part3-engineering/22-cicd' },
             { text: '23 · 监控与可观测性', link: '/part3-engineering/23-observability' }
           ]
-        }
-      ],
-      '/part4-advanced/': [
+        },
         {
           text: '第四部分 · 关键组合技术',
           collapsed: false,
@@ -105,22 +101,31 @@ export default defineConfig({
             { text: '27 · Electron 定制', link: '/part4-advanced/27-customize' },
             { text: '28 · 插件系统设计', link: '/part4-advanced/28-plugin-system' }
           ]
-        }
-      ],
-      '/part5-projects/': [
+        },
         {
           text: '第五部分 · 实战项目',
           collapsed: false,
           items: [
             { text: '29 · 项目：截屏录屏工具', link: '/part5-projects/29-project-screenshot-recorder' },
-            { text: '30 · 项目：多窗口应用', link: '/part5-projects/30-project-multiwindow' }
+            { text: '30 · 项目：多窗口工作台', link: '/part5-projects/30-project-multiwindow' }
           ]
-        }
-      ],
-      '/examples/': [
+        },
+        {
+          text: '案例库 · 踩坑实录',
+          collapsed: true,
+          items: [
+            { text: '01 · 缩放持久化白屏', link: '/cases/01-zoom-white-screen' },
+            { text: '02 · GPU 崩溃五步分析法', link: '/cases/02-gpu-crash' },
+            { text: '03 · setPosition 失效', link: '/cases/03-setposition' },
+            { text: '04 · 多窗口关闭崩溃与升级决策', link: '/cases/04-multi-window-crash' },
+            { text: '05 · 坐标系偏移', link: '/cases/05-browserview-coords' },
+            { text: '06 · Apple Silicon 崩溃', link: '/cases/06-apple-silicon' },
+            { text: '07 · 命令行开关不生效', link: '/cases/07-flag-not-working' }
+          ]
+        },
         {
           text: 'Examples 跟学用例',
-          collapsed: false,
+          collapsed: true,
           items: [
             { text: '用例地图', link: '/examples/' },
             { text: '01 · 最小窗口', link: '/examples/01-hello/' },
@@ -136,37 +141,18 @@ export default defineConfig({
             { text: '11 · 单实例锁', link: '/examples/11-single-instance/' },
             { text: '12 · 主进程网络请求', link: '/examples/12-net/' }
           ]
-        }
-      ],
-      '/cases/': [
-        {
-          text: '案例库 · 踩坑实录',
-          collapsed: false,
-          items: [
-            { text: '01 · 缩放持久化白屏', link: '/cases/01-zoom-white-screen' },
-            { text: '02 · GPU 崩溃五步分析法', link: '/cases/02-gpu-crash' },
-            { text: '03 · setPosition 失效', link: '/cases/03-setposition' },
-            { text: '04 · 多窗口关闭崩溃与升级决策', link: '/cases/04-multi-window-crash' },
-            { text: '05 · 坐标系偏移', link: '/cases/05-browserview-coords' },
-            { text: '06 · Apple Silicon 崩溃', link: '/cases/06-apple-silicon' },
-            { text: '07 · 命令行开关不生效', link: '/cases/07-flag-not-working' }
-          ]
-        }
-      ],
-      '/hub/': [
+        },
         {
           text: 'Hub',
-          collapsed: false,
+          collapsed: true,
           items: [
             { text: '应用 Hub · 谁在用 Electron', link: '/hub/apps' },
             { text: '资料 Hub · 权威与三方资料', link: '/hub/resources' }
           ]
-        }
-      ],
-      '/appendix/': [
+        },
         {
           text: '附录',
-          collapsed: false,
+          collapsed: true,
           items: [
             { text: '学习路线图', link: '/appendix/roadmap' },
             { text: '命令行与环境变量速查', link: '/appendix/cli-reference' },
