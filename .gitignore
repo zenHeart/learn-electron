@@ -18,4 +18,4 @@ lerna-debug.log*
 .pnp.js
 dist
 test-results
-playwright-report
+playwright-report.playwright-mcp/
