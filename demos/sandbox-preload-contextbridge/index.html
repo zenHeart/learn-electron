@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>安全基线示例</title>
+</head>
+<body>
+  <h1>三层防线示例</h1>
+
+  <section>
+    <h2>1. 配置读取（invoke / handle）</h2>
+    <button id="btn-config">读取 theme</button>
+    <button id="btn-config-bad">读取非法 key（应报错）</button>
+    <pre id="out-config"></pre>
+  </section>
+
+  <section>
+    <h2>2. 文件选择</h2>
+    <button id="btn-file">选择文件</button>
+    <pre id="out-file"></pre>
+  </section>
+
+  <section>
+    <h2>3. 打开外部链接（白名单）</h2>
+    <button id="btn-safe-url">打开 https://electronjs.org/</button>
+    <button id="btn-bad-url">打开 javascript:alert(1)（应被拒）</button>
+  </section>
+
+  <section>
+    <h2>4. 事件订阅（应返回取消函数）</h2>
+    <button id="btn-subscribe">订阅主题变更</button>
+    <button id="btn-unsubscribe">取消订阅</button>
+    <pre id="out-event"></pre>
+  </section>
+
+  <script src="./renderer.js"></script>
+</body>
+</html>

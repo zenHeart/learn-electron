@@ -1,0 +1,28 @@
+{
+  "name": "electron-builder-config-demo",
+  "version": "0.1.0",
+  "description": "Reference electron-builder.yml covering macOS/Windows/Linux + signing + auto-update",
+  "main": "main.js",
+  "scripts": {
+    "dist:dir": "electron-builder --dir",
+    "dist:mac": "electron-builder --mac",
+    "dist:win": "electron-builder --win",
+    "dist:linux": "electron-builder --linux",
+    "dist": "electron-builder"
+  },
+  "keywords": [
+    "electron",
+    "electron-builder",
+    "packaging",
+    "reference-config"
+  ],
+  "author": "zenheart",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^31.0.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "//": "Build settings live in electron-builder.yml; keep package.json clean."
+  }
+}

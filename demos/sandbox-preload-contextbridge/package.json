@@ -1,0 +1,21 @@
+{
+  "name": "electron-sandbox-preload-contextbridge",
+  "version": "0.1.0",
+  "description": "Modern Electron security baseline: sandbox + contextIsolation + contextBridge",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "keywords": [
+    "electron",
+    "security",
+    "sandbox",
+    "contextBridge",
+    "preload"
+  ],
+  "author": "zenheart",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^31.0.0"
+  }
+}

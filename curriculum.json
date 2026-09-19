@@ -1,0 +1,524 @@
+{
+  "local_series": "learn-electron",
+  "capabilities": [
+    {
+      "id": "electron-process-model",
+      "title": "Electron 进程模型与进程边界",
+      "outcome": "能独立画出一张进程全景图，准确说出主进程/渲染进程/GPU 进程/Utility Process 各自的能力面与崩溃域，并解释为什么渲染进程默认没有 Node",
+      "chapter_refs": [
+        "docs/part1-background/04-process-model.md",
+        "docs/part1-background/03-architecture.md",
+        "docs/part1-background/05-lifecycle.md"
+      ]
+    },
+    {
+      "id": "electron-app-lifecycle",
+      "title": "应用生命周期与 BrowserWindow",
+      "outcome": "能解释 ready/window-all-closed/before-quit/activate 等事件时序，独立实现单实例锁与 macOS 重新创建窗口的逻辑",
+      "chapter_refs": [
+        "docs/part1-background/05-lifecycle.md",
+        "docs/part2-core/07-windows.md"
+      ]
+    },
+    {
+      "id": "electron-ipc",
+      "title": "IPC 通信：invoke/handle/send/MessagePort",
+      "outcome": "能为四种 IPC 模式选型，能写出 invoke/handle 与主进程主动推送的完整示例，并解释结构化克隆的限制",
+      "chapter_refs": [
+        "docs/part2-core/09-ipc.md"
+      ]
+    },
+    {
+      "id": "electron-security-baseline",
+      "title": "安全模型：contextIsolation/sandbox/contextBridge 三开关",
+      "outcome": "能解释三道防线的职责分工，能写出符合现代安全基线的 webPreferences，能用 preload + contextBridge 暴露最小化 API",
+      "chapter_refs": [
+        "docs/part2-core/10-security.md"
+      ]
+    },
+    {
+      "id": "electron-preload-contextbridge",
+      "title": "preload 桥接与 contextBridge 白名单",
+      "outcome": "能写出暴露语义化窄接口的 preload，能在桥一侧做参数校验，能让事件订阅返回取消函数",
+      "chapter_refs": [
+        "docs/part2-core/09-ipc.md",
+        "docs/part2-core/10-security.md"
+      ]
+    },
+    {
+      "id": "electron-typed-ipc",
+      "title": "IPC 类型契约（TypeScript）",
+      "outcome": "能用 TypeScript 定义主/渲染两侧共享的 IPC 通道契约，使编译期能查出通道名拼错与参数类型不匹配",
+      "chapter_refs": [
+        "docs/part2-core/09-ipc.md",
+        "docs/part3-engineering/15-scaffold.md"
+      ]
+    },
+    {
+      "id": "electron-window-lifecycle",
+      "title": "BrowserWindow 生命周期与多窗口管理",
+      "outcome": "能解释 BrowserWindow 创建/就绪/聚焦/关闭/销毁的完整事件链，能实现窗口状态持久化与多账号窗口隔离",
+      "chapter_refs": [
+        "docs/part2-core/07-windows.md",
+        "docs/part1-background/05-lifecycle.md"
+      ]
+    },
+    {
+      "id": "electron-packaging-builder",
+      "title": "electron-builder 完整打包配置",
+      "outcome": "能写一份覆盖三平台的 electron-builder.yml，理解 asar / asarUnpack / extraResources / afterSign 钩子的边界",
+      "chapter_refs": [
+        "docs/part3-engineering/19-packaging.md"
+      ]
+    },
+    {
+      "id": "electron-packaging-forge",
+      "title": "Electron Forge 打包与 makers 体系",
+      "outcome": "能用 Forge 的 maker 体系产出多平台安装包，理解 Forge 与 electron-builder 在产物与自动更新集成上的差异",
+      "chapter_refs": [
+        "docs/part3-engineering/19-packaging.md"
+      ]
+    },
+    {
+      "id": "electron-signing",
+      "title": "代码签名与公证",
+      "outcome": "能解释三平台签名机制差异，能写 macOS codesign + notarize 的完整脚本链，能搭远程签名架构",
+      "chapter_refs": [
+        "docs/part3-engineering/20-signing.md"
+      ]
+    },
+    {
+      "id": "electron-auto-update",
+      "title": "自动更新与热修复四层体系",
+      "outcome": "能解释整包/增量/渲染层/运行时补丁四层时效光谱，能用 electron-updater 接入 generic/GitHub 更新源",
+      "chapter_refs": [
+        "docs/part3-engineering/21-releases-updates.md"
+      ]
+    },
+    {
+      "id": "electron-performance-memory",
+      "title": "内存优化：working set、GC 与进程级监控",
+      "outcome": "能用 app.getAppMetrics 读进程内存，能区分 private working set 与 shared，能写出 GC 停顿诊断方法",
+      "chapter_refs": [
+        "docs/part3-engineering/18-performance.md"
+      ]
+    },
+    {
+      "id": "electron-performance-startup",
+      "title": "启动性能：分段埋点与冷启动优化",
+      "outcome": "能拆解主进程启动各阶段耗时，能用 --trace-startup 录启动 trace，能识别同步初始化阻塞事件循环的位置",
+      "chapter_refs": [
+        "docs/part3-engineering/18-performance.md",
+        "docs/part1-background/05-lifecycle.md"
+      ]
+    },
+    {
+      "id": "electron-testing",
+      "title": "Electron 测试：Vitest + Playwright _electron",
+      "outcome": "能用三层测试策略（单元/集成/E2E），能用 Playwright _electron 启动真实应用做 IPC 与窗口契约测试",
+      "chapter_refs": [
+        "docs/part3-engineering/17-testing.md"
+      ]
+    },
+    {
+      "id": "electron-cicd",
+      "title": "CI/CD 与无头测试（xvfb + 三平台矩阵）",
+      "outcome": "能写出 GitHub Actions 三平台矩阵 workflow，理解 xvfb 的作用，能用 --no-sandbox 解决 Linux 容器沙箱问题",
+      "chapter_refs": [
+        "docs/part3-engineering/22-cicd.md"
+      ]
+    },
+    {
+      "id": "electron-versioning",
+      "title": "Electron 版本策略与升级清单",
+      "outcome": "能解释 SemVer 在 Electron 中的实际含义，能列出 3 条支持线、EOL 日期，能写出升级前检查清单与回滚预案",
+      "chapter_refs": [
+        "docs/appendix/versioning.md"
+      ]
+    },
+    {
+      "id": "electron-observability",
+      "title": "监控与可观测性：Crashpad + Sentry",
+      "outcome": "能接入崩溃上报，能读取 minidump，能用 source map 与符号文件做堆栈符号化",
+      "chapter_refs": [
+        "docs/part3-engineering/23-observability.md"
+      ]
+    },
+    {
+      "id": "electron-debugging",
+      "title": "调试体系：主进程/渲染进程/CDP",
+      "outcome": "能用 --inspect 调试主进程，能用 Chrome DevTools 远程连接渲染进程，能用 chrome://gpu 与 chrome://tracing 诊断 GPU 与启动问题",
+      "chapter_refs": [
+        "docs/part3-engineering/16-debugging.md",
+        "docs/appendix/cli-reference.md"
+      ]
+    },
+    {
+      "id": "electron-capstone-markdown-editor",
+      "title": "端到端 capstone：最小 Markdown 编辑器",
+      "outcome": "能从零搭一个最小 Markdown 编辑器：菜单、preload 桥、文件系统读写、配置持久化、窗口状态保存与恢复、打包三平台",
+      "chapter_refs": [
+        "docs/part5-projects/29-project-screenshot-recorder.md",
+        "docs/part5-projects/30-project-multiwindow.md",
+        "docs/appendix/roadmap.md"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "electron-docs",
+      "url": "https://www.electronjs.org/docs/latest",
+      "locator": "Tutorial / API Reference / Guides",
+      "accessed_at": "2026-09-20",
+      "scope": "Electron 官方文档（API 行为与默认值的最终事实来源）"
+    },
+    {
+      "id": "electron-process-model",
+      "url": "https://www.electronjs.org/docs/latest/tutorial/process-model",
+      "locator": "Tutorial > Process Model",
+      "accessed_at": "2026-09-20",
+      "scope": "官方进程模型章节（主/渲染/GPU/Utility 的官方定义）"
+    },
+    {
+      "id": "electron-security",
+      "url": "https://www.electronjs.org/docs/latest/tutorial/security",
+      "locator": "Tutorial > Security",
+      "accessed_at": "2026-09-20",
+      "scope": "官方安全清单（contextIsolation/sandbox/nodeIntegration 开关矩阵）"
+    },
+    {
+      "id": "electron-context-bridge",
+      "url": "https://www.electronjs.org/docs/latest/api/context-bridge",
+      "locator": "API > contextBridge",
+      "accessed_at": "2026-09-20",
+      "scope": "contextBridge.exposeInMainWorld 的 API 与限制"
+    },
+    {
+      "id": "electron-message-ports",
+      "url": "https://www.electronjs.org/docs/latest/tutorial/message-ports",
+      "locator": "Tutorial > MessagePorts",
+      "accessed_at": "2026-09-20",
+      "scope": "MessageChannelMain 与 MessagePort 的官方示例"
+    },
+    {
+      "id": "electron-forge",
+      "url": "https://www.electronforge.io/",
+      "locator": "Config / Makers",
+      "accessed_at": "2026-09-20",
+      "scope": "Electron Forge 官方配置与 makers 文档"
+    },
+    {
+      "id": "electron-builder",
+      "url": "https://www.electron.build/",
+      "locator": "Configuration",
+      "accessed_at": "2026-09-20",
+      "scope": "electron-builder 配置字段与多平台产物"
+    },
+    {
+      "id": "electron-builder-auto-update",
+      "url": "https://www.electron.build/auto-update",
+      "locator": "Auto Update",
+      "accessed_at": "2026-09-20",
+      "scope": "electron-updater 接入 generic/GitHub 更新源的官方文档"
+    },
+    {
+      "id": "electron-performance",
+      "url": "https://www.electronjs.org/docs/latest/tutorial/performance",
+      "locator": "Tutorial > Performance",
+      "accessed_at": "2026-09-20",
+      "scope": "官方性能指南（启动、内存、GPU）"
+    },
+    {
+      "id": "electron-headless-ci",
+      "url": "https://www.electronjs.org/docs/latest/tutorial/testing-on-headless-ci",
+      "locator": "Tutorial > Testing on Headless CI",
+      "accessed_at": "2026-09-20",
+      "scope": "xvfb 与 Linux 容器化测试的官方姿势"
+    },
+    {
+      "id": "playwright-electron",
+      "url": "https://playwright.dev/docs/api/class-electron",
+      "locator": "API > Electron",
+      "accessed_at": "2026-09-20",
+      "scope": "Playwright _electron API（启动真实 Electron 应用）"
+    },
+    {
+      "id": "electron-releases",
+      "url": "https://releases.electronjs.org/",
+      "locator": "Releases table",
+      "accessed_at": "2026-09-20",
+      "scope": "Electron 各 major 对应的 Chromium / Node 版本与 EOL 日期"
+    },
+    {
+      "id": "electron-breaking-changes",
+      "url": "https://www.electronjs.org/docs/latest/breaking-changes",
+      "locator": "Breaking Changes",
+      "accessed_at": "2026-09-20",
+      "scope": "每个 major 的破坏性变更清单（升级前必读）"
+    },
+    {
+      "id": "fuses",
+      "url": "https://www.electronjs.org/docs/latest/tutorial/fuses",
+      "locator": "Tutorial > Fuses",
+      "accessed_at": "2026-09-20",
+      "scope": "Fuses 开关（运行时不可逆的安全开关）"
+    },
+    {
+      "id": "electron-rebuild",
+      "url": "https://www.electronjs.org/docs/latest/tutorial/using-native-node-modules",
+      "locator": "Tutorial > Native Node Modules",
+      "accessed_at": "2026-09-20",
+      "scope": "@electron/rebuild 与原生模块 ABI 处理"
+    }
+  ],
+  "series": [
+    {
+      "id": "learn-electron",
+      "repository": "https://github.com/zenHeart/learn-electron",
+      "revision": "50d67b42f5eea438a3e2ecf301f8eafc48028936",
+      "entry": "README.md",
+      "capability_refs": [
+        "electron-process-model",
+        "electron-app-lifecycle",
+        "electron-ipc",
+        "electron-security-baseline",
+        "electron-preload-contextbridge",
+        "electron-typed-ipc",
+        "electron-window-lifecycle",
+        "electron-packaging-builder",
+        "electron-packaging-forge",
+        "electron-signing",
+        "electron-auto-update",
+        "electron-performance-memory",
+        "electron-performance-startup",
+        "electron-testing",
+        "electron-cicd",
+        "electron-versioning",
+        "electron-observability",
+        "electron-debugging",
+        "electron-capstone-markdown-editor"
+      ]
+    }
+  ],
+  "roles": [
+    {
+      "id": "electron-desktop-engineer",
+      "title": "Electron 桌面端工程师",
+      "responsibility": "独立交付一个跨平台 Electron 应用：进程模型、IPC、安全、打包签名、自动更新、CI/CD 与可观测性",
+      "task_refs": [
+        "screenshot-recorder-capstone",
+        "multi-window-isolation"
+      ],
+      "requirements": [
+        {
+          "logic": "all",
+          "capability_refs": [
+            "electron-process-model",
+            "electron-app-lifecycle",
+            "electron-ipc",
+            "electron-security-baseline",
+            "electron-preload-contextbridge",
+            "electron-window-lifecycle",
+            "electron-packaging-builder",
+            "electron-signing",
+            "electron-versioning"
+          ],
+          "source_refs": [
+            "electron-docs",
+            "electron-process-model",
+            "electron-security"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "electron-release-engineer",
+      "title": "Electron 发布工程师",
+      "responsibility": "搭建三平台打包、签名、公证、自动更新、CI/CD 与可观测性流水线",
+      "task_refs": [
+        "screenshot-recorder-capstone",
+        "white-screen-zoom",
+        "gpu-crash-five-step"
+      ],
+      "requirements": [
+        {
+          "logic": "any",
+          "capability_refs": [
+            "electron-packaging-builder",
+            "electron-packaging-forge",
+            "electron-signing",
+            "electron-auto-update",
+            "electron-cicd",
+            "electron-observability",
+            "electron-versioning"
+          ],
+          "source_refs": [
+            "electron-builder",
+            "electron-builder-auto-update",
+            "electron-forge",
+            "electron-releases"
+          ]
+        }
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "id": "white-screen-zoom",
+      "owner": "learn-electron",
+      "title": "缩放持久化引发的渲染白屏",
+      "kind": "bug-fix",
+      "task": "复现并定位 macOS 上缩放率持久化造成的 BrowserWindow 渲染白屏，修复并加回归测试",
+      "constraints": [
+        "不修改 Electron 源码",
+        "复现路径可重复",
+        "回归测试在 CI 无头环境可跑"
+      ],
+      "deliverables": [
+        "根因诊断报告",
+        "最小修复 patch",
+        "Playwright 回归用例"
+      ],
+      "acceptance": [
+        "现象→诊断→根因→修复四段齐全",
+        "修复后 24 小时挂机不复发",
+        "回归用例在 GitHub Actions 跑通"
+      ],
+      "environment": "macOS 13+ + Electron 22+ + Playwright",
+      "entry": "docs/cases/01-zoom-white-screen.md",
+      "transfer": "把诊断流程迁移到 GPU 崩溃与多窗口关闭崩溃案例",
+      "delayed_check": "一周后用同方法诊断新出现的渲染异常",
+      "provenance": "documented-project",
+      "capability_refs": [
+        "electron-process-model",
+        "electron-window-lifecycle",
+        "electron-debugging"
+      ],
+      "source_refs": [
+        "electron-docs",
+        "electron-performance"
+      ],
+      "prerequisite_refs": [
+        "electron-process-model"
+      ],
+      "verification": "not-run"
+    },
+    {
+      "id": "gpu-crash-five-step",
+      "owner": "learn-electron",
+      "title": "GPU 崩溃五步分析法",
+      "kind": "diagnostic",
+      "task": "用五步法诊断用户报告的 GPU 进程崩溃，定位是渲染层、驱动层还是硬件加速配置问题",
+      "constraints": [
+        "不依赖线上崩溃数据",
+        "本地最小复现路径",
+        "提供 chrome://gpu 截图与日志"
+      ],
+      "deliverables": [
+        "五步诊断日志",
+        "结论与规避方案",
+        "上报模板"
+      ],
+      "acceptance": [
+        "每步给出明确结论",
+        "规避方案在用户机器验证",
+        "上报模板覆盖 Electron 团队所需字段"
+      ],
+      "environment": "Windows 10/11 + Electron 22+",
+      "entry": "docs/cases/02-gpu-crash.md",
+      "transfer": "复用五步法诊断 WebContents 崩溃与命令链崩溃",
+      "delayed_check": "两周后用相同手法诊断一个 ARM Mac 崩溃案例",
+      "provenance": "documented-project",
+      "capability_refs": [
+        "electron-debugging",
+        "electron-performance-memory",
+        "electron-observability"
+      ],
+      "source_refs": [
+        "electron-docs",
+        "electron-performance"
+      ],
+      "verification": "not-run"
+    },
+    {
+      "id": "multi-window-isolation",
+      "owner": "learn-electron",
+      "title": "多账号窗口隔离与状态管理",
+      "kind": "design",
+      "task": "设计一个支持多账号登录的 Electron 工作台，每个账号独立 BrowserWindow、partition 与 preload",
+      "constraints": [
+        "账号间 Cookie/LocalStorage 完全隔离",
+        "单实例锁兼容",
+        "新窗口可在 200ms 内打开"
+      ],
+      "deliverables": [
+        "架构图",
+        "窗口管理核心代码",
+        "权限与 Session 划分策略"
+      ],
+      "acceptance": [
+        "三个账号并行登录互不可见",
+        "任意账号登出不影响其他账号",
+        "主进程单例锁正确处理 second-instance 事件"
+      ],
+      "environment": "macOS / Windows + Electron 22+",
+      "entry": "docs/part5-projects/30-project-multiwindow.md",
+      "transfer": "把窗口注册表模式移植到任意多视图应用",
+      "delayed_check": "两周后在新项目里复用该模式",
+      "provenance": "designed",
+      "capability_refs": [
+        "electron-window-lifecycle",
+        "electron-app-lifecycle",
+        "electron-security-baseline"
+      ],
+      "source_refs": [
+        "electron-docs",
+        "electron-process-model"
+      ],
+      "verification": "not-run"
+    },
+    {
+      "id": "screenshot-recorder-capstone",
+      "owner": "learn-electron",
+      "title": "截屏录屏工具（六轮迭代到发布）",
+      "kind": "capstone",
+      "task": "从零搭一个截屏 + 录屏工具，分六轮迭代到可发布：三进程骨架、IPC 封装、性能优化、打包签名、CI/CD、可观测性",
+      "constraints": [
+        "六轮每轮必须有可演示产物",
+        "最后一轮有 mac/win 三平台安装包",
+        "崩溃数据接入上报"
+      ],
+      "deliverables": [
+        "完整源代码",
+        "三轮 Playwright 集成测试",
+        "三平台安装包"
+      ],
+      "acceptance": [
+        "每轮 30 分钟内可独立完成",
+        "安装包可在干净机器运行",
+        "崩溃上报链路验证收到 minidump"
+      ],
+      "environment": "macOS / Windows + Electron 22+ + electron-builder",
+      "entry": "docs/part5-projects/29-project-screenshot-recorder.md",
+      "transfer": "把六轮迭代流程复用给任意中型 Electron 应用",
+      "delayed_check": "一个月后回访项目进度",
+      "provenance": "designed",
+      "capability_refs": [
+        "electron-process-model",
+        "electron-ipc",
+        "electron-preload-contextbridge",
+        "electron-performance-startup",
+        "electron-packaging-builder",
+        "electron-signing",
+        "electron-cicd",
+        "electron-observability"
+      ],
+      "source_refs": [
+        "electron-docs",
+        "electron-builder",
+        "electron-forge"
+      ],
+      "verification": "not-run"
+    }
+  ]
+}

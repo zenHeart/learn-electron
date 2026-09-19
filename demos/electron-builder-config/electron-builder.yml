@@ -1,0 +1,98 @@
+# ============================================================
+# 应用身份
+# ============================================================
+appId: com.example.markdown-notebook
+productName: Markdown Notebook
+copyright: Copyright © 2026 ${author}
+
+# ============================================================
+# 目录与产物
+# ============================================================
+directories:
+  output: dist
+  buildResources: build
+
+# ============================================================
+# 进入 asar 的内容（相对项目根）
+# ============================================================
+files:
+  - package.json
+  - main/**/*
+  - preload/**/*
+  - renderer/**/*
+  - '!**/{__tests__,test,tests}/**'
+  - '!**/*.{md,markdown}'
+
+asar: true
+asarUnpack:
+  - '**/*.node'
+
+extraResources:
+  - from: build/bin
+    to: bin
+    filter: ['**/*']
+
+# ============================================================
+# 三平台产物
+# ============================================================
+
+# ---- Windows ----
+win:
+  target:
+    - target: nsis
+      arch: [x64, arm64]
+  icon: build/icon.ico
+  certificateFile: ${env.WINDOWS_CERT_FILE}
+  certificatePassword: ${env.WINDOWS_CERT_PASSWORD}
+  signingHashAlgorithms: [sha256]
+
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  allowElevation: true
+  createDesktopShortcut: always
+  createStartMenuShortcut: true
+  shortcutName: ${productName}
+  artifactName: ${productName}-${version}-${arch}-setup.${ext}
+
+# ---- macOS ----
+mac:
+  target:
+    - target: dmg
+      arch: [x64, arm64]
+    - target: zip
+  category: public.app-category.productivity
+  icon: build/icon.icns
+  hardenedRuntime: true
+  gatekeeperAssess: false
+  entitlements: build/entitlements.mac.plist
+  entitlementsInherit: build/entitlements.mac.plist
+  notarize: true
+  notarizeService: notarytool
+
+dmg:
+  sign: true
+  artifactName: ${productName}-${version}-${arch}.${ext}
+
+# ---- Linux ----
+linux:
+  target:
+    - target: AppImage
+    - target: deb
+  icon: build/icons
+  category: Office
+  maintainer: you@example.com
+  vendor: example
+  desktop:
+    Name: ${productName}
+    Comment: A minimal Markdown editor
+    Categories: Office;TextEditor;
+
+# ============================================================
+# 自动更新
+# ============================================================
+publish:
+  - provider: generic
+    url: https://releases.example.com/${os}/
+    channel: latest

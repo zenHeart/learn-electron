@@ -1,0 +1,27 @@
+{
+  "name": "electron-typed-ipc-contract",
+  "version": "0.1.0",
+  "description": "TypeScript shared IPC contract: main + preload + renderer all share one type-safe API",
+  "main": "main.ts",
+  "scripts": {
+    "build:shared": "tsc shared/ipc-contract.ts --outDir dist --target ES2022 --module ESNext --declaration --skipLibCheck",
+    "build:main": "tsc main.ts --outDir dist --target ES2022 --module CommonJS --skipLibCheck",
+    "build:preload": "tsc preload.ts --outDir dist --target ES2022 --module CommonJS --skipLibCheck",
+    "build:renderer": "tsc renderer.ts --outDir dist/renderer --target ES2022 --module ESNext --skipLibCheck",
+    "build": "pnpm build:shared && pnpm build:main && pnpm build:preload && pnpm build:renderer",
+    "start": "electron dist/main.js",
+    "type-check": "tsc --noEmit"
+  },
+  "keywords": [
+    "electron",
+    "typescript",
+    "ipc",
+    "type-safety"
+  ],
+  "author": "zenheart",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^31.0.0",
+    "typescript": "^5.4.0"
+  }
+}
